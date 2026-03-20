@@ -2916,7 +2916,7 @@ function handleUpload(type, e) {
       saveState(st);
       renderStrMetrics(st.strData);
     } else {
-      // Simulate Lighthouse compset
+      // Build compset from Settings hotels + STR data for realistic rates
       st.lighthouseData = buildMockCompset();
       saveState(st);
       renderCompsetTable(st.lighthouseData);
@@ -2968,16 +2968,38 @@ function renderStrMetrics(s) {
 }
 
 function buildMockCompset() {
+  const st      = getState();
+  const myName  = st.property?.hotel || 'Your Property';
+  const myAdr   = st.strData?.adr || 141;
+
+  // Use hotels from Settings compset, fall back to generic names
+  const compNames = (st.compset && st.compset.length)
+    ? st.compset
+    : ['Competitor A', 'Competitor B', 'Competitor C', 'Competitor D'];
+
+  // Generate realistic rates spread around STR comp ADR
+  const compAdr = st.strData?.compAdr || myAdr * 1.07;
+  const spread  = [-0.08, -0.02, +0.06, +0.13, +0.19];
+  const avails  = ['Available', 'Available', 'Limited', 'Available', 'Available'];
+  const reviews = [8.6, 8.1, 8.3, 7.9, 7.6];
+
+  const competitors = compNames.slice(0, 5).map((name, i) => ({
+    name,
+    rate:   Math.round(compAdr * (1 + (spread[i] || (i * 0.05 - 0.1)))),
+    avail:  avails[i] || 'Available',
+    review: reviews[i] || (8.5 - i * 0.2),
+    isYou:  false,
+  }));
+
   return [
-    { name: 'Grand Plaza Hotel',    rate: 159, avail: 'Available', review: 8.1, isYou: false },
-    { name: 'Hotel Central Park',   rate: 152, avail: 'Limited',   review: 8.6, isYou: false },
-    { name: 'Your Property',        rate: 141, avail: 'Available', review: 8.4, isYou: true  },
-    { name: 'Boutique Eleven',      rate: 135, avail: 'Available', review: 7.9, isYou: false },
-    { name: 'City Lodge & Suites',  rate: 122, avail: 'Available', review: 7.5, isYou: false },
+    { name: myName, rate: myAdr, avail: 'Available', review: 8.4, isYou: true },
+    ...competitors,
   ];
 }
 
 function renderCompsetTable(data) {
+  const st     = getState();
+  const sym    = { EUR:'€', PLN:'zł', USD:'$', GBP:'£' }[st.property?.currency] || '€';
   const sorted = [...data].sort((a, b) => b.rate - a.rate);
   const myRate = (data.find(h => h.isYou) || {}).rate || 0;
 
@@ -2996,7 +3018,7 @@ function renderCompsetTable(data) {
     return `<tr class="${h.isYou ? 'you' : ''}">
       <td><span class="comp-rank ${i === 0 ? 'top' : ''}">${i + 1}</span></td>
       <td>${h.name}${h.isYou ? '<span class="you-badge">You</span>' : ''}</td>
-      <td><span class="comp-rate">€${h.rate}</span></td>
+      <td><span class="comp-rate">${sym}${h.rate}</span></td>
       <td><span class="comp-avail-dot" style="background:${availColor}"></span>${h.avail}</td>
       <td>★ ${h.review}</td>
       <td>${vsHtml}</td>
@@ -3355,6 +3377,11 @@ function saveSettings() {
   if (lines.length) {
     st.compset = lines;
     renderCompsetChips(lines);
+    // Rebuild Lighthouse compset so Reports table reflects new hotel names
+    if (st.lighthouseData) {
+      st.lighthouseData = buildMockCompset();
+      renderCompsetTable(st.lighthouseData);
+    }
   }
 
   // Sync total-rooms with availability calendar
@@ -3503,15 +3530,29 @@ const ENGINE = {
     }
 
     // ── 5. COMPSET SNAPSHOT ──
-    const myName = property?.hotel || 'Your Property';
-    let compset = lighthouseData?.length ? lighthouseData.map(h => ({
-      ...h, rate: h.isYou ? balanced : h.rate
-    })) : [
-      { name: myName,              isYou:true,  rate:balanced, review:8.4, avail:'Available' },
-      { name: 'Competitor A',      isYou:false, rate:Math.round(balanced*1.09), review:8.1, avail:'Available' },
-      { name: 'Competitor B',      isYou:false, rate:Math.round(balanced*1.05), review:8.6, avail:'Limited' },
-      { name: 'Competitor C',      isYou:false, rate:Math.round(balanced*0.94), review:7.8, avail:'Available' },
-    ];
+    const myName     = property?.hotel || 'Your Property';
+    const st         = getState();
+    const settingsComp = st.compset || [];
+    const compNames  = settingsComp.length
+      ? settingsComp
+      : ['Competitor A', 'Competitor B', 'Competitor C'];
+
+    const compSpread  = [-0.08, -0.02, +0.06, +0.12];
+    const compAvails  = ['Available', 'Limited', 'Available', 'Available'];
+    const compReviews = [8.6, 8.3, 8.0, 7.7];
+
+    let compset = lighthouseData?.length
+      ? lighthouseData.map(h => ({ ...h, rate: h.isYou ? balanced : h.rate }))
+      : [
+          { name: myName, isYou: true, rate: balanced, review: 8.4, avail: 'Available' },
+          ...compNames.slice(0, 4).map((name, i) => ({
+            name,
+            isYou:  false,
+            rate:   Math.round(compADR * (1 + (compSpread[i] ?? (i * 0.05 - 0.08)))),
+            review: compReviews[i] ?? (8.5 - i * 0.25),
+            avail:  compAvails[i]  ?? 'Available',
+          }))
+        ];
 
     // ── 6. TIPS ──
     const tips = [];
