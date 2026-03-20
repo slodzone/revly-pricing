@@ -997,6 +997,381 @@
     .vs-badge.below { background: var(--green-dim); color: var(--green); }
     .vs-badge.even  { background: var(--bg3);       color: var(--text-3); }
 
+    /* ════════════════════════════════════════
+       AVAILABILITY — Step 5
+    ════════════════════════════════════════ */
+    .btn-save-avail {
+      padding: 0.45rem 1.1rem;
+      background: var(--amber);
+      color: #0e0f11;
+      font-family: var(--font-b);
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 0.25rem;
+      transition: opacity 0.15s, box-shadow 0.15s;
+    }
+    .btn-save-avail:hover { opacity: 0.88; box-shadow: 0 2px 12px rgba(245,166,35,0.3); }
+
+    /* Controls */
+    .avail-controls { padding: 1rem 1.25rem; }
+
+    .avail-controls-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .avail-controls-sep {
+      width: 1px; height: 32px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .avail-control-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .avail-label {
+      font-size: 0.67rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+
+    .avail-input {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.42rem 0.7rem;
+      color: var(--text);
+      font-family: var(--font-b);
+      font-size: 0.83rem;
+      outline: none;
+      transition: border-color 0.15s;
+      min-width: 0;
+    }
+
+    .avail-input:focus { border-color: var(--amber); }
+    .avail-input[type="number"] { width: 80px; font-family: var(--font-m); }
+    .avail-input[type="date"]   { width: 140px; }
+
+    .avail-range-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-fill {
+      padding: 0.42rem 0.9rem;
+      background: var(--amber-dim);
+      border: 1px solid rgba(245,166,35,0.25);
+      border-radius: var(--radius-sm);
+      color: var(--amber);
+      font-size: 0.77rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.12s;
+      white-space: nowrap;
+    }
+
+    .btn-fill:hover { background: rgba(245,166,35,0.22); }
+
+    .avail-legend {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .leg-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.73rem;
+      color: var(--text-2);
+    }
+
+    .leg-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+    }
+
+    /* Calendar */
+    .cal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cal-nav-btn {
+      width: 28px; height: 28px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .cal-nav-btn:hover { border-color: var(--border-hi); color: var(--text); }
+
+    .cal-month-label {
+      font-family: var(--font-d);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      min-width: 160px;
+      text-align: center;
+    }
+
+    .cal-today-btn {
+      padding: 0.28rem 0.75rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      font-size: 0.72rem;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .cal-today-btn:hover { border-color: var(--border-hi); color: var(--text); }
+
+    .cal-summary {
+      font-family: var(--font-m);
+      font-size: 0.65rem;
+      color: var(--text-3);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 0.28rem 0.75rem;
+    }
+
+    .cal-dow-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 0.5rem 1rem 0.25rem;
+      gap: 4px;
+    }
+
+    .cal-dow-row div {
+      text-align: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      padding: 0.25rem 0;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Calendar cells */
+    .cal-cell {
+      aspect-ratio: 1 / 1.1;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      cursor: pointer;
+      transition: border-color 0.12s, transform 0.1s, background 0.12s;
+      position: relative;
+      overflow: hidden;
+      min-height: 64px;
+    }
+
+    .cal-cell::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: var(--fill-h, 0%);
+      background: var(--fill-col, transparent);
+      opacity: 0.18;
+      transition: height 0.3s ease;
+    }
+
+    .cal-cell:hover {
+      border-color: var(--amber);
+      transform: translateY(-1px);
+      z-index: 1;
+    }
+
+    .cal-cell.empty {
+      background: transparent;
+      border-color: transparent;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .cal-cell.today {
+      border-color: var(--amber) !important;
+    }
+
+    .cal-cell.past {
+      opacity: 0.4;
+    }
+
+    .cal-cell.selected {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 2px rgba(245,166,35,0.25);
+    }
+
+    .cal-cell-date {
+      font-family: var(--font-m);
+      font-size: 0.72rem;
+      color: var(--text-2);
+      line-height: 1;
+    }
+
+    .cal-cell.today .cal-cell-date { color: var(--amber); }
+
+    .cal-cell-rooms {
+      font-family: var(--font-m);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .cal-cell-pct {
+      font-size: 0.6rem;
+      color: var(--text-3);
+      line-height: 1;
+    }
+
+    .cal-cell-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+
+    /* Inline edit popup */
+    .cell-popup {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg2);
+      border: 1px solid var(--border-hi);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      min-width: 320px;
+      z-index: 500;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      animation: popupIn 0.18s ease;
+    }
+
+    @keyframes popupIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .cell-popup-date {
+      font-family: var(--font-d);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .cell-popup-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .popup-stepper {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .stepper-btn {
+      padding: 0.38rem 0.65rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-2);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .stepper-btn:hover { background: var(--bg4); color: var(--text); border-color: var(--border-hi); }
+
+    .stepper-input {
+      flex: 1;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.38rem 0.7rem;
+      color: var(--text);
+      font-family: var(--font-m);
+      font-size: 1rem;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .stepper-input:focus { border-color: var(--amber); }
+
+    .popup-meta {
+      font-family: var(--font-m);
+      font-size: 0.68rem;
+      color: var(--text-3);
+      margin-bottom: 1rem;
+    }
+
+    .popup-actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+    }
+
+    .popup-cancel {
+      padding: 0.42rem 1rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-2);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .popup-cancel:hover { border-color: var(--border-hi); color: var(--text); }
+
+    .popup-save {
+      padding: 0.42rem 1.1rem;
+      background: var(--amber);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: #0e0f11;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.12s;
+    }
+
+    .popup-save:hover { opacity: 0.88; }
+
   </style>
 </head>
 <body>
@@ -1381,16 +1756,101 @@
     <!-- ── AVAILABILITY — Step 5 ── -->
     <div class="section" id="sec-availability">
       <div class="section-inner">
-        <div class="page-header">
-          <div class="page-eyebrow">Data</div>
-          <div class="page-title">Availability</div>
-          <div class="page-sub">Set rooms available per date for group quotations.</div>
+
+        <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div>
+            <div class="page-eyebrow">Data</div>
+            <div class="page-title">Availability</div>
+            <div class="page-sub">Set rooms available per date for group quotations. Click any day to edit.</div>
+          </div>
+          <button class="btn-save-avail" onclick="saveAvailability()">Save changes</button>
         </div>
-        <div class="placeholder">
-          <div class="placeholder-badge">Coming — Step 5</div>
-          <h2>Availability Calendar</h2>
-          <p>Per-day room inventory with quick-fill range tools.</p>
+
+        <!-- Controls row -->
+        <div class="avail-controls card" style="margin-bottom:1.25rem">
+          <div class="avail-controls-row">
+
+            <div class="avail-control-group">
+              <label class="avail-label">Total rooms in property</label>
+              <input type="number" class="avail-input" id="total-rooms" value="120" min="1" max="9999"
+                onchange="renderCalendar()">
+            </div>
+
+            <div class="avail-controls-sep"></div>
+
+            <div class="avail-control-group">
+              <label class="avail-label">Quick-fill range</label>
+              <div class="avail-range-row">
+                <input type="date" class="avail-input" id="fill-from">
+                <span style="color:var(--text-3);font-size:0.8rem">→</span>
+                <input type="date" class="avail-input" id="fill-to">
+                <input type="number" class="avail-input" id="fill-rooms" placeholder="Rooms" min="0" style="width:90px">
+                <button class="btn-fill" onclick="applyFill()">Apply</button>
+              </div>
+            </div>
+
+            <div class="avail-controls-sep"></div>
+
+            <div class="avail-control-group">
+              <label class="avail-label">Legend</label>
+              <div class="avail-legend">
+                <span class="leg-item"><span class="leg-dot" style="background:var(--green)"></span>Available</span>
+                <span class="leg-item"><span class="leg-dot" style="background:var(--amber)"></span>Moderate</span>
+                <span class="leg-item"><span class="leg-dot" style="background:var(--red)"></span>High demand</span>
+              </div>
+            </div>
+
+          </div>
         </div>
+
+        <!-- Month nav + calendar -->
+        <div class="card" style="padding:0;overflow:hidden">
+
+          <div class="cal-header">
+            <button class="cal-nav-btn" onclick="calPrevMonth()">
+              <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M7.5 2L4 6l3.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="cal-month-label" id="cal-month-label">—</div>
+            <button class="cal-nav-btn" onclick="calNextMonth()">
+              <svg viewBox="0 0 12 12" fill="none" width="12" height="12"><path d="M4.5 2L8 6l-3.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div style="margin-left:auto;display:flex;gap:0.5rem;align-items:center">
+              <button class="cal-today-btn" onclick="calGoToday()">Today</button>
+              <div class="cal-summary" id="cal-summary">— days configured</div>
+            </div>
+          </div>
+
+          <div class="cal-dow-row">
+            <div>Mon</div><div>Tue</div><div>Wed</div>
+            <div>Thu</div><div>Fri</div>
+            <div style="color:var(--amber)">Sat</div>
+            <div style="color:var(--amber)">Sun</div>
+          </div>
+
+          <div class="cal-grid" id="cal-grid"></div>
+
+        </div>
+
+        <!-- Inline edit popup -->
+        <div class="cell-popup" id="cell-popup" style="display:none">
+          <div class="cell-popup-date" id="popup-date-label">—</div>
+          <div class="cell-popup-row">
+            <label class="avail-label">Rooms available</label>
+            <div class="popup-stepper">
+              <button class="stepper-btn" onclick="stepRooms(-5)">−5</button>
+              <button class="stepper-btn" onclick="stepRooms(-1)">−</button>
+              <input type="number" class="stepper-input" id="popup-rooms" min="0">
+              <button class="stepper-btn" onclick="stepRooms(1)">+</button>
+              <button class="stepper-btn" onclick="stepRooms(5)">+5</button>
+            </div>
+          </div>
+          <div class="popup-meta" id="popup-meta">— rooms · —% booked</div>
+          <div class="popup-actions">
+            <button class="popup-cancel" onclick="closePopup()">Cancel</button>
+            <button class="popup-save"   onclick="savePopup()">Save day</button>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1466,6 +1926,7 @@ function boot() {
 
   refreshDashboard();
   restoreReports();
+  calInit();
 }
 
 // ── NAVIGATE ─────────────────────────────────────────────────
@@ -1480,6 +1941,7 @@ function navigate(id) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.sec === id));
   document.getElementById('bc-page').textContent = SEC_NAMES[id] || id;
   document.title = 'Revly — ' + (SEC_NAMES[id] || id);
+  if (id === 'availability') renderCalendar();
 }
 
 document.querySelectorAll('.nav-item[data-sec]').forEach(el =>
@@ -1493,8 +1955,7 @@ function refreshDashboard() {
   // Setup chips
   const hasReports = !!(st.strData || st.lighthouseData);
   const hasBudget  = !!st.budget;
-  const hasAvail   = Object.keys(st.availability || {}).length > 0;
-  const steps      = [hasReports, hasBudget, hasAvail];
+  const hasAvail   = Object.keys(st.availability || {}).length > 0;  const steps      = [hasReports, hasBudget, hasAvail];
   const done       = steps.filter(Boolean).length;
 
   setChip('chip-reports', hasReports, done === 0);
@@ -1757,6 +2218,222 @@ function restoreReports() {
 function saveState(st) {
   localStorage.setItem('revly_state', JSON.stringify(st));
 }
+
+// ── AVAILABILITY ─────────────────────────────────────────────
+
+let calYear, calMonth, popupDate = null;
+
+function calInit() {
+  const now = new Date();
+  calYear  = now.getFullYear();
+  calMonth = now.getMonth(); // 0-based
+
+  // Default fill-from / fill-to
+  const pad = n => String(n).padStart(2,'0');
+  const todayStr = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+  const futureDate = new Date(now); futureDate.setDate(futureDate.getDate() + 30);
+  const futureStr = `${futureDate.getFullYear()}-${pad(futureDate.getMonth()+1)}-${pad(futureDate.getDate())}`;
+
+  document.getElementById('fill-from').value = todayStr;
+  document.getElementById('fill-to').value   = futureStr;
+  document.getElementById('fill-rooms').value = getTotalRooms();
+
+  renderCalendar();
+}
+
+function getTotalRooms() {
+  return parseInt(document.getElementById('total-rooms')?.value) || 120;
+}
+
+function fmtKey(y, m, d) {
+  return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+}
+
+function getAvail() {
+  return getState().availability || {};
+}
+
+function pressureClass(available, total) {
+  const booked = 1 - available / total;
+  if (booked >= 0.8) return { cls: 'red',   col: 'var(--red)',   h: Math.round(booked*100) };
+  if (booked >= 0.5) return { cls: 'amber',  col: 'var(--amber)', h: Math.round(booked*100) };
+  return               { cls: 'green',  col: 'var(--green)', h: Math.round(booked*100) };
+}
+
+function renderCalendar() {
+  const total   = getTotalRooms();
+  const avail   = getAvail();
+  const now     = new Date();
+  const today   = fmtKey(now.getFullYear(), now.getMonth(), now.getDate());
+
+  // Month label
+  document.getElementById('cal-month-label').textContent =
+    new Date(calYear, calMonth, 1).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+
+  // First day of month (0=Sun) → shift to Mon-first
+  const firstDow = new Date(calYear, calMonth, 1).getDay();
+  const startOffset = firstDow === 0 ? 6 : firstDow - 1;
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  const grid = document.getElementById('cal-grid');
+  let html = '';
+
+  // Empty leading cells
+  for (let i = 0; i < startOffset; i++) {
+    html += `<div class="cal-cell empty"></div>`;
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key    = fmtKey(calYear, calMonth, d);
+    const rooms  = avail[key] !== undefined ? avail[key] : total;
+    const { col, h } = pressureClass(rooms, total);
+    const booked = total - rooms;
+    const pct    = Math.round((booked / total) * 100);
+    const isToday = key === today;
+    const isPast  = key < today;
+    const isWknd  = [5,6].includes((new Date(calYear, calMonth, d).getDay() + 6) % 7); // Sat=5 Sun=6
+
+    html += `
+      <div class="cal-cell${isToday?' today':''}${isPast?' past':''}"
+           style="--fill-col:${col};--fill-h:${h}%"
+           onclick="openPopup('${key}',${rooms},${total})"
+           title="${key}">
+        <div class="cal-cell-bar" style="background:${col};opacity:${pct>=50?0.7:0.35}"></div>
+        <div class="cal-cell-date" style="${isWknd?'color:var(--amber)':''}">${d}</div>
+        <div class="cal-cell-rooms">${rooms}</div>
+        <div class="cal-cell-pct" style="color:${col}">${pct}%</div>
+      </div>`;
+  }
+
+  grid.innerHTML = html;
+
+  // Summary
+  const configured = Object.keys(avail).filter(k => {
+    const [y,m] = k.split('-').map(Number);
+    return y === calYear && m-1 === calMonth;
+  }).length;
+  document.getElementById('cal-summary').textContent =
+    configured > 0 ? `${configured} days configured` : 'No days configured yet';
+}
+
+function calPrevMonth() {
+  calMonth--;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+}
+
+function calNextMonth() {
+  calMonth++;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+}
+
+function calGoToday() {
+  const now = new Date();
+  calYear  = now.getFullYear();
+  calMonth = now.getMonth();
+  renderCalendar();
+}
+
+function applyFill() {
+  const from  = document.getElementById('fill-from').value;
+  const to    = document.getElementById('fill-to').value;
+  const rooms = parseInt(document.getElementById('fill-rooms').value);
+  if (!from || !to || isNaN(rooms) || rooms < 0) { toast('Fill in all range fields'); return; }
+  if (from > to) { toast('From date must be before To date'); return; }
+
+  const st  = getState();
+  if (!st.availability) st.availability = {};
+
+  let cur = new Date(from + 'T00:00:00');
+  const end = new Date(to + 'T00:00:00');
+  let count = 0;
+  while (cur <= end) {
+    const key = cur.toISOString().slice(0, 10);
+    st.availability[key] = Math.min(rooms, getTotalRooms());
+    cur.setDate(cur.getDate() + 1);
+    count++;
+  }
+  saveState(st);
+  renderCalendar();
+  refreshDashboard();
+  toast(`${count} days updated`);
+}
+
+function openPopup(key, rooms, total) {
+  popupDate = key;
+  const [y, m, d] = key.split('-');
+  const label = new Date(key + 'T00:00:00').toLocaleDateString('en-GB',
+    { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+  document.getElementById('popup-date-label').textContent = label;
+  document.getElementById('popup-rooms').value = rooms;
+  updatePopupMeta(rooms, total);
+
+  document.getElementById('cell-popup').style.display = '';
+
+  // Highlight selected cell
+  document.querySelectorAll('.cal-cell').forEach(c => c.classList.remove('selected'));
+  const cells = document.querySelectorAll('.cal-cell:not(.empty)');
+  const dayNum = parseInt(d);
+  const firstDow = new Date(parseInt(y), parseInt(m)-1, 1).getDay();
+  const offset   = firstDow === 0 ? 6 : firstDow - 1;
+  const idx      = offset + dayNum - 1;
+  if (cells[idx - offset] && cells[idx - offset]) {
+    // find by position in grid
+  }
+  // simpler: find the one with matching title
+  document.querySelectorAll(`.cal-cell[title="${key}"]`).forEach(c => c.classList.add('selected'));
+
+  document.getElementById('popup-rooms').focus();
+}
+
+function updatePopupMeta(rooms, total) {
+  const t = total || getTotalRooms();
+  const booked = t - rooms;
+  const pct    = Math.round((booked / t) * 100);
+  document.getElementById('popup-meta').textContent =
+    `${booked} rooms blocked · ${pct}% booked · ${rooms} available`;
+}
+
+function stepRooms(delta) {
+  const input = document.getElementById('popup-rooms');
+  const val   = Math.max(0, Math.min(getTotalRooms(), parseInt(input.value || 0) + delta));
+  input.value = val;
+  updatePopupMeta(val, getTotalRooms());
+}
+
+function savePopup() {
+  if (!popupDate) return;
+  const rooms = parseInt(document.getElementById('popup-rooms').value);
+  if (isNaN(rooms) || rooms < 0) { toast('Enter a valid number'); return; }
+
+  const st = getState();
+  if (!st.availability) st.availability = {};
+  st.availability[popupDate] = Math.min(rooms, getTotalRooms());
+  saveState(st);
+
+  closePopup();
+  renderCalendar();
+  refreshDashboard();
+  toast('Day saved');
+}
+
+function closePopup() {
+  document.getElementById('cell-popup').style.display = 'none';
+  document.querySelectorAll('.cal-cell').forEach(c => c.classList.remove('selected'));
+  popupDate = null;
+}
+
+function saveAvailability() {
+  toast('Availability saved ✓');
+  refreshDashboard();
+}
+
+// Close popup on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closePopup();
+});
 
 boot();
 </script>
