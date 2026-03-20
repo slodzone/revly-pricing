@@ -1583,6 +1583,320 @@
       transition: left 0.6s ease;
     }
 
+    /* ════════════════════════════════════════
+       RATE IDEAS — Step 7
+    ════════════════════════════════════════ */
+    .ri-form-title {
+      font-family: var(--font-d);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .ri-form-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .ri-form-footer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .ri-submit-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.5rem;
+      background: var(--amber);
+      color: #0e0f11;
+      font-family: var(--font-d);
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: opacity 0.15s, box-shadow 0.15s;
+      white-space: nowrap;
+    }
+
+    .ri-submit-btn:hover  { opacity: 0.88; box-shadow: 0 2px 16px rgba(245,166,35,0.35); }
+    .ri-submit-btn:active { transform: scale(0.98); }
+    .ri-submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .ri-data-pills {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .ri-data-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.22rem 0.6rem;
+      border-radius: 99px;
+      font-family: var(--font-m);
+      font-size: 0.62rem;
+    }
+
+    .ri-data-pill.has  { background: var(--green-dim); color: var(--green); border: 1px solid rgba(62,207,142,0.2); }
+    .ri-data-pill.miss { background: var(--bg3);       color: var(--text-3); border: 1px solid var(--border); }
+
+    /* Spinner */
+    .ri-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3.5rem 2rem;
+      gap: 0.75rem;
+    }
+
+    .ri-spinner {
+      width: 36px; height: 36px;
+      border: 2.5px solid var(--border);
+      border-top-color: var(--amber);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .ri-loading-label {
+      font-family: var(--font-d);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .ri-loading-steps {
+      font-family: var(--font-m);
+      font-size: 0.7rem;
+      color: var(--text-3);
+      transition: opacity 0.3s;
+    }
+
+    /* Context bar */
+    .ri-context-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      color: var(--text-2);
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .ri-context-bar svg { color: var(--amber); flex-shrink: 0; }
+
+    /* Primary card */
+    .ri-primary-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ri-primary-label {
+      font-family: var(--font-m);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.35rem;
+    }
+
+    .ri-primary-rate {
+      font-family: var(--font-m);
+      font-size: 2.8rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .ri-primary-sub {
+      font-size: 0.73rem;
+      color: var(--text-3);
+    }
+
+    /* Confidence ring */
+    .ri-confidence-ring-wrap {
+      position: relative;
+      width: 64px; height: 64px;
+      flex-shrink: 0;
+    }
+
+    .ri-confidence-ring { width: 64px; height: 64px; }
+
+    .ri-confidence-val {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-m);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--amber);
+    }
+
+    /* Metrics row */
+    .ri-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: 1.1rem;
+    }
+
+    .ri-metric {
+      padding: 0.75rem 0.9rem;
+      border-right: 1px solid var(--border);
+      background: var(--bg3);
+    }
+
+    .ri-metric:last-child { border-right: none; }
+
+    .ri-metric-label {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.35rem;
+    }
+
+    .ri-metric-val {
+      font-family: var(--font-m);
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .ri-metric-val.green { color: var(--green); }
+    .ri-metric-val.amber { color: var(--amber); }
+    .ri-metric-val.red   { color: var(--red);   }
+
+    /* Reasoning */
+    .ri-reasoning {
+      font-size: 0.8rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      padding: 0.9rem 1rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--amber);
+    }
+
+    /* Scenarios */
+    .ri-scenarios-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.65rem;
+    }
+
+    .ri-scenarios {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .ri-scenario {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      cursor: pointer;
+      transition: border-color 0.15s, transform 0.12s;
+      position: relative;
+    }
+
+    .ri-scenario:hover { border-color: var(--border-hi); transform: translateY(-1px); }
+
+    .ri-scenario.selected {
+      border-color: var(--amber);
+      background: rgba(245,166,35,0.04);
+    }
+
+    .ri-scenario.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 0.75rem; right: 0.85rem;
+      font-size: 0.7rem;
+      color: var(--amber);
+    }
+
+    .ri-scenario-emoji { font-size: 1.2rem; margin-bottom: 0.4rem; }
+
+    .ri-scenario-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      margin-bottom: 0.5rem;
+    }
+
+    .ri-scenario-rate {
+      font-family: var(--font-m);
+      font-size: 1.55rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .ri-scenario-desc {
+      font-size: 0.73rem;
+      color: var(--text-3);
+      line-height: 1.55;
+    }
+
+    /* Tips */
+    .ri-tip {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    .ri-tip:last-child { border-bottom: none; }
+
+    .ri-tip-arrow {
+      color: var(--amber);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+      font-family: var(--font-m);
+    }
+
+    .ri-tip-text {
+      font-size: 0.8rem;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .ri-tip-text b { color: var(--text); font-weight: 500; }
+
   </style>
 </head>
 <body>
@@ -2068,15 +2382,177 @@
     <!-- ── PRICING — Step 7 ── -->
     <div class="section" id="sec-pricing">
       <div class="section-inner">
+
         <div class="page-header">
           <div class="page-eyebrow">Intelligence</div>
           <div class="page-title">Rate Ideas</div>
-          <div class="page-sub">Smart group rate proposals based on your data & market.</div>
+          <div class="page-sub">Fill in the group inquiry details — the engine uses your STR, Lighthouse & availability data to propose rates.</div>
         </div>
-        <div class="placeholder">
-          <div class="placeholder-badge">Coming — Step 7</div>
-          <h2>Rate Engine</h2>
-          <p>Intelligent rate proposals with compset comparison & scenario modeling.</p>
+
+        <!-- ── Inquiry Form ── -->
+        <div class="ri-form card" style="margin-bottom:1.25rem">
+          <div class="ri-form-title">Group Inquiry</div>
+          <div class="ri-form-grid">
+            <div class="sfield">
+              <label class="sfield-label">Check-in</label>
+              <input class="sfield-input" id="ri-checkin" type="date">
+            </div>
+            <div class="sfield">
+              <label class="sfield-label">Check-out</label>
+              <input class="sfield-input" id="ri-checkout" type="date">
+            </div>
+            <div class="sfield">
+              <label class="sfield-label">Rooms / night</label>
+              <input class="sfield-input" id="ri-rooms" type="number" min="1" placeholder="e.g. 30">
+            </div>
+            <div class="sfield">
+              <label class="sfield-label">Room type</label>
+              <select class="sfield-input" id="ri-roomtype">
+                <option value="standard">Standard</option>
+                <option value="superior">Superior</option>
+                <option value="deluxe">Deluxe</option>
+                <option value="suite">Suite</option>
+              </select>
+            </div>
+            <div class="sfield">
+              <label class="sfield-label">Group type</label>
+              <select class="sfield-input" id="ri-grouptype">
+                <option value="corporate">Corporate Meeting</option>
+                <option value="mice">Conference / MICE</option>
+                <option value="tour">Tour Group</option>
+                <option value="sports">Sports Team</option>
+                <option value="social">Social Event</option>
+                <option value="gov">Government / NGO</option>
+              </select>
+            </div>
+            <div class="sfield">
+              <label class="sfield-label">F&B requirements</label>
+              <select class="sfield-input" id="ri-fb">
+                <option value="ro">Room only</option>
+                <option value="bb">Bed &amp; Breakfast</option>
+                <option value="hb">Half Board</option>
+                <option value="fb">Full Board</option>
+              </select>
+            </div>
+            <div class="sfield">
+              <label class="sfield-label">Lead time</label>
+              <select class="sfield-input" id="ri-urgency">
+                <option value="flex">Flexible (&gt;3 months)</option>
+                <option value="normal">Normal (1–3 months)</option>
+                <option value="urgent">Urgent (&lt;1 month)</option>
+              </select>
+            </div>
+            <div class="sfield">
+              <label class="sfield-label">Client relationship</label>
+              <select class="sfield-input" id="ri-repeat">
+                <option value="new">New client</option>
+                <option value="occ">Occasional</option>
+                <option value="regular">Regular</option>
+                <option value="key">Key account</option>
+              </select>
+            </div>
+          </div>
+          <div class="ri-form-footer">
+            <button class="ri-submit-btn" id="ri-submit-btn" onclick="generateRates()">
+              <svg viewBox="0 0 14 14" fill="none" width="13" height="13">
+                <path d="M7 1L8.6 5.2H13L9.7 7.8l1.3 4L7 9.6l-4 2.2 1.3-4L1 5.2h4.4L7 1z" fill="currentColor"/>
+              </svg>
+              Generate Rate Ideas
+            </button>
+            <div class="ri-data-pills" id="ri-data-pills"></div>
+          </div>
+        </div>
+
+        <!-- ── Spinner ── -->
+        <div class="ri-loading" id="ri-loading" style="display:none">
+          <div class="ri-spinner"></div>
+          <div class="ri-loading-label">Calculating rates</div>
+          <div class="ri-loading-steps" id="ri-loading-steps">Analysing data…</div>
+        </div>
+
+        <!-- ── Results ── -->
+        <div id="ri-results" style="display:none">
+
+          <!-- Context bar -->
+          <div class="ri-context-bar" id="ri-context-bar"></div>
+
+          <!-- Primary recommendation -->
+          <div class="ri-primary card" id="ri-primary-card" style="margin-bottom:1.25rem">
+            <div class="ri-primary-top">
+              <div>
+                <div class="ri-primary-label">Recommended Rate</div>
+                <div class="ri-primary-rate" id="ri-rate-display">€—</div>
+                <div class="ri-primary-sub">per room · per night · excl. VAT</div>
+              </div>
+              <div class="ri-confidence-ring-wrap">
+                <svg class="ri-confidence-ring" viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="26" stroke="var(--bg3)" stroke-width="5" fill="none"/>
+                  <circle cx="32" cy="32" r="26" stroke="var(--amber)" stroke-width="5" fill="none"
+                    stroke-dasharray="163.4" stroke-dashoffset="163.4"
+                    id="ri-ring-circle" stroke-linecap="round"
+                    style="transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 0.8s ease"/>
+                </svg>
+                <div class="ri-confidence-val" id="ri-confidence-val">—</div>
+              </div>
+            </div>
+            <div class="ri-metrics-row">
+              <div class="ri-metric">
+                <div class="ri-metric-label">vs Comp ADR</div>
+                <div class="ri-metric-val" id="rm-vs-comp">—</div>
+              </div>
+              <div class="ri-metric">
+                <div class="ri-metric-label">Conversion</div>
+                <div class="ri-metric-val" id="rm-conv">—</div>
+              </div>
+              <div class="ri-metric">
+                <div class="ri-metric-label">Est. Revenue</div>
+                <div class="ri-metric-val" id="rm-revenue">—</div>
+              </div>
+              <div class="ri-metric">
+                <div class="ri-metric-label">Budget Contribution</div>
+                <div class="ri-metric-val" id="rm-budget">—</div>
+              </div>
+              <div class="ri-metric">
+                <div class="ri-metric-label">Nights</div>
+                <div class="ri-metric-val" id="rm-nights">—</div>
+              </div>
+              <div class="ri-metric">
+                <div class="ri-metric-label">Avail. Pressure</div>
+                <div class="ri-metric-val" id="rm-pressure">—</div>
+              </div>
+            </div>
+            <div class="ri-reasoning" id="ri-reasoning"></div>
+          </div>
+
+          <!-- Scenarios -->
+          <div class="ri-scenarios-label">Alternative Scenarios</div>
+          <div class="ri-scenarios" id="ri-scenarios"></div>
+
+          <!-- Compset table -->
+          <div class="card" style="margin-bottom:1.25rem">
+            <div class="card-header">
+              <div class="card-title">Compset Snapshot</div>
+              <div style="font-family:var(--font-m);font-size:0.62rem;color:var(--text-3)" id="ri-comp-source">from Lighthouse</div>
+            </div>
+            <table class="comp-table">
+              <thead>
+                <tr>
+                  <th>#</th><th>Hotel</th><th>Rate</th>
+                  <th>Occ. Index</th><th>Review</th><th>vs. You</th>
+                </tr>
+              </thead>
+              <tbody id="ri-comp-tbody"></tbody>
+            </table>
+          </div>
+
+          <!-- Tips -->
+          <div class="card" id="ri-tips-card">
+            <div class="card-header">
+              <div class="card-title">Revenue Manager Notes</div>
+            </div>
+            <div id="ri-tips-list"></div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -2285,6 +2761,7 @@ function boot() {
   restoreReports();
   calInit();
   loadSettings();
+  initRateIdeasForm();
 }
 
 // ── NAVIGATE ─────────────────────────────────────────────────
@@ -2301,6 +2778,7 @@ function navigate(id) {
   document.title = 'Revly — ' + (SEC_NAMES[id] || id);
   if (id === 'availability') renderCalendar();
   if (id === 'settings')    loadSettings();
+  if (id === 'pricing')     updateDataPills();
 }
 
 document.querySelectorAll('.nav-item[data-sec]').forEach(el =>
@@ -2936,6 +3414,334 @@ document.addEventListener('DOMContentLoaded', () => {
     curr.addEventListener('change', () => updateCurrencyPrefix(curr.value));
   }
 });
+
+// ── RATE ENGINE ───────────────────────────────────────────────
+
+const ENGINE = {
+  groupFactor:   { corporate:1.00, mice:1.05, tour:0.87, sports:0.90, social:0.93, gov:0.82 },
+  fbFactor:      { ro:1.00, bb:1.08, hb:1.18, fb:1.28 },
+  urgencyFactor: { flex:1.00, normal:1.03, urgent:1.08 },
+  repeatFactor:  { new:1.00, occ:0.97, regular:0.93, key:0.89 },
+  roomFactor:    { standard:1.00, superior:1.15, deluxe:1.30, suite:1.65 },
+  seasonIndex:   { 1:0.78,2:0.81,3:0.88,4:0.97,5:1.05,6:1.10,7:1.13,8:1.10,9:1.07,10:0.98,11:0.85,12:0.83 },
+  dowIndex:      { 0:0.87,1:1.00,2:1.04,3:1.07,4:1.09,5:1.04,6:0.89 }, // Sun-Sat
+
+  calc(params) {
+    const { checkin, checkout, rooms, roomType, groupType, fb, urgency, repeat,
+            strData, lighthouseData, availability, budget, property } = params;
+
+    const totalRooms = property?.rooms || 120;
+    const nights     = Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
+    const month      = new Date(checkin).getMonth() + 1;
+
+    // ── 1. BASE from STR comp ADR + Lighthouse OTA ──
+    let base = 110;
+    if (strData?.compAdr) base = strData.compAdr;
+    if (lighthouseData?.length) {
+      const otaAvg = lighthouseData.filter(h => !h.isYou).reduce((s,h) => s+h.rate, 0)
+                   / lighthouseData.filter(h => !h.isYou).length;
+      base = strData?.compAdr
+        ? strData.compAdr * 0.55 + otaAvg * 0.87 * 0.45
+        : otaAvg * 0.88;
+    }
+
+    // ── 2. MULTIPLIERS ──
+    const season   = this.seasonIndex[month] || 1;
+    const dow      = this._avgDow(checkin, checkout);
+    const group    = this.groupFactor[groupType]  || 1;
+    const fbM      = this.fbFactor[fb]            || 1;
+    const urgencyM = this.urgencyFactor[urgency]  || 1;
+    const repeatM  = this.repeatFactor[repeat]    || 1;
+    const roomM    = this.roomFactor[roomType]    || 1;
+    const volume   = rooms >= 50 ? 0.93 : rooms >= 30 ? 0.96 : rooms >= 15 ? 0.98 : 1.00;
+    const mpiM     = strData?.mpi ? 1 + Math.max(-0.08, Math.min(0.08, (strData.mpi - 100) / 100 * 0.3)) : 1;
+    const rgiM     = strData?.rgi ? 1 + Math.max(-0.06, Math.min(0.06, (100 - strData.rgi) / 100 * 0.2)) : 1;
+    const pressure = this._availPressure(availability, totalRooms, rooms, checkin, checkout);
+    const pressM   = 0.90 + pressure * 0.25;
+    const budgetM  = this._budgetPace(budget);
+
+    const balanced = Math.round(base * season * dow * group * fbM * urgencyM * repeatM * roomM * volume * mpiM * rgiM * pressM * budgetM);
+    const winRate  = Math.round(balanced * 0.92);
+    const maxRate  = Math.round(balanced * 1.10);
+
+    // ── 3. METRICS ──
+    const compADR    = strData?.compAdr || base;
+    const sym        = this._sym(property?.currency);
+    const vsCompPct  = ((balanced - compADR) / compADR * 100).toFixed(1);
+    const vsCompStr  = (vsCompPct >= 0 ? '+' : '') + vsCompPct + '%';
+    const estRev     = balanced * rooms * nights;
+    const estRevStr  = sym + estRev.toLocaleString('en-US');
+    const budgetContrib = budget?.roomRev
+      ? '+' + (estRev / budget.roomRev * 100).toFixed(1) + '%' : '—';
+    const conv = balanced > compADR * 1.08 ? 'Low' : balanced > compADR * 1.02 ? 'Medium' : 'High';
+    const pressureLabel = pressure > 0.7 ? 'High' : pressure > 0.4 ? 'Moderate' : 'Low';
+    const confidence = Math.min(96, 55 + [!!strData, !!lighthouseData?.length,
+      !!Object.keys(availability||{}).length, !!budget, !!property].filter(Boolean).length * 8
+      + (pressure > 0.5 ? 3 : 0));
+
+    // ── 4. REASONING ──
+    const parts = [];
+    if (strData) {
+      parts.push(`Your MPI of ${strData.mpi} puts you ${strData.mpi >= 100 ? 'above' : 'below'} index — comp ADR is ${sym}${strData.compAdr}. ` +
+        `Your RGI of ${strData.rgi} suggests ${strData.rgi < 100 ? 'room to grow rate' : 'strong RevPAR position'}.`);
+    }
+    if (pressure > 0) {
+      const bookedPct = Math.round(pressure * 100);
+      parts.push(`Availability on requested dates is ~${bookedPct}% occupied — ${pressureLabel.toLowerCase()} demand window. ` +
+        `The ${rooms}-room ask fills ${Math.round(rooms / (totalRooms * (1-pressure)) * 100)}% of remaining inventory.`);
+    }
+    if (lighthouseData?.length) {
+      const comp = lighthouseData.filter(h => !h.isYou);
+      const lo = Math.min(...comp.map(h=>h.rate));
+      const hi = Math.max(...comp.map(h=>h.rate));
+      parts.push(`Compset is ranging ${sym}${lo}–${sym}${hi} on OTA. Group rate of ${sym}${balanced} is ${vsCompPct >= 0 ? 'above' : 'below'} comp ADR after group discount, ` +
+        `adjusted for ${groupType} segment and ${nights}-night stay.`);
+    }
+    if (!parts.length) {
+      parts.push(`Rate based on ${new Date(checkin).toLocaleDateString('en-GB',{month:'long'})} seasonality index (${season}×), ` +
+        `${groupType} group factor, ${rooms} rooms over ${nights} nights.`);
+    }
+
+    // ── 5. COMPSET SNAPSHOT ──
+    const myName = property?.hotel || 'Your Property';
+    let compset = lighthouseData?.length ? lighthouseData.map(h => ({
+      ...h, rate: h.isYou ? balanced : h.rate
+    })) : [
+      { name: myName,              isYou:true,  rate:balanced, review:8.4, avail:'Available' },
+      { name: 'Competitor A',      isYou:false, rate:Math.round(balanced*1.09), review:8.1, avail:'Available' },
+      { name: 'Competitor B',      isYou:false, rate:Math.round(balanced*1.05), review:8.6, avail:'Limited' },
+      { name: 'Competitor C',      isYou:false, rate:Math.round(balanced*0.94), review:7.8, avail:'Available' },
+    ];
+
+    // ── 6. TIPS ──
+    const tips = [];
+    if (repeat === 'key' || repeat === 'regular') tips.push({ bold:'Protect ADR.', text:' Offer an upgrade or complimentary F&B credit instead of a rate cut — rewards loyalty without eroding your rate floor.' });
+    if (urgency === 'urgent') tips.push({ bold:'Hold firm.', text:' Short lead time reduces the client\'s alternatives. Flexibility costs you leverage — stay at balanced or above.' });
+    if (groupType === 'tour') tips.push({ bold:'Net vs. commissionable.', text:' Confirm whether the operator needs a net rate (you add commission) or a commissionable gross rate before sending the proposal.' });
+    if (pressure > 0.65) tips.push({ bold:'High demand.', text:` Consider requiring an attrition clause of 80%+ and a non-refundable deposit — you're giving up displacing business on a tight window.` });
+    if (rooms >= 40) tips.push({ bold:'Large group.', text:' Include a cut-off date 30–45 days out and a rooming list deadline to protect your inventory and housekeeping planning.' });
+    if (!tips.length) tips.push({ bold:'Always define the cut-off.', text:' Set a clear contract cut-off date (typically 30 days) and specify your cancellation and attrition policy in writing before confirming the block.' });
+
+    return { balanced, winRate, maxRate, sym, compADR, vsCompStr, estRevStr, budgetContrib,
+             conv, pressureLabel, confidence, nights, reasoning: parts.join(' '),
+             compset, tips, source: lighthouseData?.length ? 'from Lighthouse' : 'estimated' };
+  },
+
+  _avgDow(checkin, checkout) {
+    const vals = []; let c = new Date(checkin); const e = new Date(checkout);
+    while (c < e) { vals.push(this.dowIndex[c.getDay()]||1); c.setDate(c.getDate()+1); }
+    return vals.reduce((a,b)=>a+b,0) / (vals.length||1);
+  },
+
+  _availPressure(avail, total, requested, checkin, checkout) {
+    if (!avail || !Object.keys(avail).length) return 0.45;
+    const vals = []; let c = new Date(checkin); const e = new Date(checkout);
+    while (c < e) {
+      const k = c.toISOString().slice(0,10);
+      vals.push(avail[k] !== undefined ? avail[k] : total);
+      c.setDate(c.getDate()+1);
+    }
+    if (!vals.length) return 0.45;
+    const avgAvail = vals.reduce((a,b)=>a+b,0)/vals.length;
+    const baseP    = (total - avgAvail) / total;
+    const reqP     = Math.min(1, requested / Math.max(avgAvail, 1));
+    return Math.min(1, baseP * 0.6 + reqP * 0.4);
+  },
+
+  _budgetPace(budget) {
+    if (!budget) return 1;
+    const y   = budget.year || new Date().getFullYear();
+    const pct = (Date.now() - new Date(y,0,1)) / (new Date(y,11,31) - new Date(y,0,1));
+    const pace = 0.27 / Math.max(pct, 0.01); // simulated 27% revenue collected
+    if (pace < 0.85) return 1.06;
+    if (pace < 0.95) return 1.03;
+    if (pace > 1.10) return 0.96;
+    return 1;
+  },
+
+  _sym(currency) {
+    return { EUR:'€', PLN:'zł', USD:'$', GBP:'£' }[currency] || '€';
+  }
+};
+
+// ── RATE IDEAS UI ─────────────────────────────────────────────
+
+function initRateIdeasForm() {
+  const now  = new Date();
+  const ci   = new Date(now); ci.setDate(ci.getDate() + 35);
+  const co   = new Date(ci);  co.setDate(co.getDate() + 3);
+  const pad  = n => String(n).padStart(2,'0');
+  const fmt  = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  document.getElementById('ri-checkin').value  = fmt(ci);
+  document.getElementById('ri-checkout').value = fmt(co);
+  updateDataPills();
+}
+
+function updateDataPills() {
+  const st    = getState();
+  const pills = [
+    { label: 'STR',          has: !!st.strData },
+    { label: 'Lighthouse',   has: !!st.lighthouseData },
+    { label: 'Availability', has: Object.keys(st.availability||{}).length > 0 },
+    { label: 'Budget',       has: !!st.budget },
+  ];
+  document.getElementById('ri-data-pills').innerHTML = pills.map(p =>
+    `<span class="ri-data-pill ${p.has ? 'has' : 'miss'}">
+      ${p.has ? '✓' : '○'} ${p.label}
+    </span>`
+  ).join('');
+}
+
+function generateRates() {
+  const checkin  = document.getElementById('ri-checkin').value;
+  const checkout = document.getElementById('ri-checkout').value;
+  const rooms    = parseInt(document.getElementById('ri-rooms').value);
+
+  if (!checkin || !checkout) { toast('Enter check-in and check-out dates'); return; }
+  if (new Date(checkout) <= new Date(checkin)) { toast('Check-out must be after check-in'); return; }
+  if (!rooms || rooms < 1) { toast('Enter number of rooms'); return; }
+
+  // Show spinner
+  document.getElementById('ri-results').style.display = 'none';
+  document.getElementById('ri-loading').style.display = 'flex';
+  document.getElementById('ri-submit-btn').disabled   = true;
+
+  const steps = ['Analysing STR data…','Checking compset rates…','Calculating availability pressure…','Applying multipliers…','Building proposal…'];
+  let si = 0;
+  const stepEl = document.getElementById('ri-loading-steps');
+  const iv = setInterval(() => {
+    stepEl.style.opacity = '0';
+    setTimeout(() => { stepEl.textContent = steps[Math.min(si++, steps.length-1)]; stepEl.style.opacity = '1'; }, 150);
+  }, 480);
+
+  const st = getState();
+  const params = {
+    checkin, checkout, rooms,
+    roomType:  document.getElementById('ri-roomtype').value,
+    groupType: document.getElementById('ri-grouptype').value,
+    fb:        document.getElementById('ri-fb').value,
+    urgency:   document.getElementById('ri-urgency').value,
+    repeat:    document.getElementById('ri-repeat').value,
+    strData:        st.strData,
+    lighthouseData: st.lighthouseData,
+    availability:   st.availability || {},
+    budget:         st.budget,
+    property:       st.property,
+  };
+
+  setTimeout(() => {
+    clearInterval(iv);
+    const result = ENGINE.calc(params);
+    document.getElementById('ri-loading').style.display = 'none';
+    document.getElementById('ri-submit-btn').disabled   = false;
+
+    // Save last result
+    st.lastRate = { amount: result.balanced, confidence: result.confidence, reasoning: result.reasoning };
+    saveState(st);
+    refreshDashboard();
+
+    renderRateResult(result, params);
+  }, 2600);
+}
+
+function renderRateResult(r, params) {
+  // Context bar
+  const nights = r.nights;
+  document.getElementById('ri-context-bar').innerHTML = `
+    <svg viewBox="0 0 14 14" fill="none" width="13" height="13">
+      <path d="M7 1L8.6 5.2H13L9.7 7.8l1.3 4L7 9.6l-4 2.2 1.3-4L1 5.2h4.4L7 1z" fill="currentColor"/>
+    </svg>
+    <strong style="color:var(--text)">${params.rooms} rooms</strong> &nbsp;·&nbsp;
+    <strong style="color:var(--text)">${nights} nights</strong> &nbsp;·&nbsp;
+    ${new Date(params.checkin).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}
+    → ${new Date(params.checkout).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}
+    &nbsp;·&nbsp; Availability pressure: <strong style="color:${r.pressureLabel==='High'?'var(--red)':r.pressureLabel==='Moderate'?'var(--amber)':'var(--green)'}">${r.pressureLabel}</strong>
+  `;
+
+  // Primary rate
+  document.getElementById('ri-rate-display').textContent = r.sym + r.balanced;
+  document.getElementById('ri-confidence-val').textContent = r.confidence + '%';
+
+  // Animate confidence ring (circumference = 2π×26 ≈ 163.4)
+  const offset = 163.4 - (r.confidence / 100) * 163.4;
+  setTimeout(() => {
+    document.getElementById('ri-ring-circle').style.strokeDashoffset = offset;
+  }, 50);
+
+  // Metrics
+  const vsColour = parseFloat(r.vsCompStr) >= 0 ? 'amber' : 'green';
+  const convColour = r.conv === 'High' ? 'green' : r.conv === 'Medium' ? 'amber' : 'red';
+  setMetric('rm-vs-comp',  r.vsCompStr, vsColour);
+  setMetric('rm-conv',     r.conv,      convColour);
+  setMetric('rm-revenue',  r.estRevStr, 'green');
+  setMetric('rm-budget',   r.budgetContrib, r.budgetContrib !== '—' ? 'green' : '');
+  setMetric('rm-nights',   nights + 'n', '');
+  setMetric('rm-pressure', r.pressureLabel, r.pressureLabel==='High'?'red':r.pressureLabel==='Moderate'?'amber':'green');
+
+  // Reasoning
+  document.getElementById('ri-reasoning').textContent = r.reasoning;
+
+  // Scenarios
+  const scenarios = [
+    { emoji:'🏆', label:'Win the Deal',  rate:r.winRate, desc:`Aggressive — ${Math.round((1-r.winRate/r.balanced)*100)}% below balanced. Best for new key accounts or thin pipeline.` },
+    { emoji:'⚖️', label:'Balanced',      rate:r.balanced,desc:'Recommended. Aligns with compset and your index position.', selected: true },
+    { emoji:'📈', label:'Max Revenue',   rate:r.maxRate, desc:`Stretch target — ${Math.round((r.maxRate/r.balanced-1)*100)}% above balanced. Use for high demand or key account upsell.` },
+  ];
+  document.getElementById('ri-scenarios').innerHTML = scenarios.map((s,i) => `
+    <div class="ri-scenario${s.selected?' selected':''}" onclick="selectScenario(this)">
+      <div class="ri-scenario-emoji">${s.emoji}</div>
+      <div class="ri-scenario-label">${s.label}</div>
+      <div class="ri-scenario-rate">${r.sym}${s.rate}</div>
+      <div class="ri-scenario-desc">${s.desc}</div>
+    </div>
+  `).join('');
+
+  // Compset table
+  document.getElementById('ri-comp-source').textContent = r.source;
+  const sorted = [...r.compset].sort((a,b) => b.rate - a.rate);
+  const myRate = r.balanced;
+  document.getElementById('ri-comp-tbody').innerHTML = sorted.map((h,i) => {
+    const diff   = h.isYou ? null : Math.round(((h.rate - myRate)/myRate)*100);
+    const vsHtml = h.isYou
+      ? '<span class="vs-badge even">—</span>'
+      : diff > 0
+        ? `<span class="vs-badge above">+${diff}%</span>`
+        : `<span class="vs-badge below">${diff}%</span>`;
+    const availCol = h.avail==='Available' ? 'var(--green)' : h.avail==='Limited' ? 'var(--amber)' : 'var(--red)';
+    return `<tr class="${h.isYou?'you':''}">
+      <td><span class="comp-rank ${i===0?'top':''}">${i+1}</span></td>
+      <td>${h.name}${h.isYou?'<span class="you-badge">You</span>':''}</td>
+      <td><span class="comp-rate">${r.sym}${h.rate}</span></td>
+      <td>${h.isYou ? (params.strData?.mpi||'—') : '~'+Math.round(95+Math.random()*10)}</td>
+      <td>★ ${h.review||'—'}</td>
+      <td>${vsHtml}</td>
+    </tr>`;
+  }).join('');
+
+  // Tips
+  document.getElementById('ri-tips-list').innerHTML = r.tips.map(t =>
+    `<div class="ri-tip">
+      <div class="ri-tip-arrow">→</div>
+      <div class="ri-tip-text"><b>${t.bold}</b>${t.text}</div>
+    </div>`
+  ).join('');
+
+  // Show results
+  document.getElementById('ri-results').style.display = 'block';
+  document.getElementById('ri-results').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function setMetric(id, val, colour) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = val;
+  el.className   = 'ri-metric-val' + (colour ? ' ' + colour : '');
+}
+
+function selectScenario(el) {
+  document.querySelectorAll('.ri-scenario').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
 
 boot();
 </script>
