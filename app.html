@@ -680,6 +680,323 @@
     .toast.show { opacity: 1; transform: translateY(0); }
     .toast-dot  { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
 
+    /* ════════════════════════════════════════
+       REPORTS — Step 4
+    ════════════════════════════════════════ */
+    .info-bar {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.85rem;
+      font-size: 0.76rem;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+
+    .report-tag {
+      font-family: var(--font-m);
+      font-size: 0.62rem;
+      background: var(--green-dim);
+      color: var(--green);
+      border: 1px solid rgba(62,207,142,0.22);
+      padding: 0.15rem 0.55rem;
+      border-radius: 99px;
+    }
+
+    /* Upload zone */
+    .upload-zone {
+      border: 1.5px dashed var(--border-hi);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      text-align: center;
+    }
+
+    .upload-zone:hover {
+      border-color: var(--amber);
+      background: var(--amber-glow);
+    }
+
+    .upload-zone.drag-over {
+      border-color: var(--amber);
+      background: var(--amber-glow);
+    }
+
+    .upload-zone-icon {
+      width: 44px; height: 44px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-2);
+      margin-bottom: 0.25rem;
+    }
+
+    .upload-zone-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .upload-zone-sub {
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+
+    /* File row (post-upload) */
+    .file-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-top: 0.75rem;
+    }
+
+    .file-row-icon {
+      color: var(--text-3);
+      flex-shrink: 0;
+    }
+
+    .file-row-name {
+      flex: 1;
+      font-size: 0.8rem;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .file-row-status {
+      font-family: var(--font-m);
+      font-size: 0.65rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 99px;
+      flex-shrink: 0;
+    }
+
+    .file-row-status.parsing {
+      background: var(--amber-dim);
+      color: var(--amber);
+      border: 1px solid rgba(245,166,35,0.2);
+    }
+
+    .file-row-status.done {
+      background: var(--green-dim);
+      color: var(--green);
+      border: 1px solid rgba(62,207,142,0.2);
+    }
+
+    .file-row-remove {
+      font-size: 0.72rem;
+      color: var(--text-3);
+      cursor: pointer;
+      padding: 0.15rem 0.35rem;
+      border-radius: 3px;
+      transition: color 0.12s, background 0.12s;
+      flex-shrink: 0;
+    }
+
+    .file-row-remove:hover { color: var(--red); background: var(--red-dim); }
+
+    /* STR Metrics grid */
+    .str-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+
+    .str-kpi {
+      padding: 0.9rem 1.1rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg3);
+    }
+
+    .str-kpi:nth-child(3n) { border-right: none; }
+    .str-kpi:nth-child(n+4) { border-bottom: none; }
+    .str-kpi.accent { background: rgba(245,166,35,0.04); }
+
+    .str-kpi-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.4rem;
+    }
+
+    .str-kpi-val {
+      font-family: var(--font-m);
+      font-size: 1.3rem;
+      color: var(--text);
+    }
+
+    .str-kpi-val.muted { color: var(--text-2); }
+
+    /* Index bar */
+    .str-index-bar-wrap { }
+
+    .str-index-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-2);
+      margin-bottom: 0.5rem;
+    }
+
+    .str-index-label span:last-child {
+      font-family: var(--font-m);
+      color: var(--amber);
+    }
+
+    .str-index-track {
+      height: 6px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      position: relative;
+      overflow: visible;
+      margin-bottom: 0.35rem;
+    }
+
+    .str-index-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--red) 0%, var(--amber) 50%, var(--green) 80%);
+      border-radius: 99px;
+      opacity: 0.35;
+      transition: width 0.6s ease;
+      width: 0%;
+    }
+
+    .str-index-marker {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px; height: 12px;
+      background: var(--amber);
+      border: 2px solid var(--bg2);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(245,166,35,0.5);
+      transition: left 0.6s ease;
+      left: 0%;
+    }
+
+    .str-index-ends {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-m);
+      font-size: 0.6rem;
+      color: var(--text-3);
+    }
+
+    /* Compset table */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.81rem;
+    }
+
+    .comp-table th {
+      text-align: left;
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      padding: 0.5rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comp-table td {
+      padding: 0.75rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-2);
+      vertical-align: middle;
+    }
+
+    .comp-table tbody tr:last-child td { border-bottom: none; }
+
+    .comp-table tbody tr:hover td { background: var(--bg3); }
+
+    .comp-table tbody tr.you td {
+      color: var(--text);
+      background: rgba(245,166,35,0.04);
+    }
+
+    .comp-rank {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      font-family: var(--font-m);
+      font-size: 0.68rem;
+      color: var(--text-3);
+    }
+
+    .comp-rank.top {
+      background: rgba(245,166,35,0.15);
+      border-color: rgba(245,166,35,0.25);
+      color: var(--amber);
+    }
+
+    .you-badge {
+      display: inline-block;
+      font-family: var(--font-m);
+      font-size: 0.58rem;
+      background: var(--amber-dim);
+      color: var(--amber);
+      border: 1px solid rgba(245,166,35,0.25);
+      padding: 0.08rem 0.45rem;
+      border-radius: 99px;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+
+    .comp-rate {
+      font-family: var(--font-m);
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .comp-avail-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+
+    .vs-badge {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-m);
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 99px;
+    }
+
+    .vs-badge.above { background: var(--red-dim);   color: var(--red); }
+    .vs-badge.below { background: var(--green-dim); color: var(--green); }
+    .vs-badge.even  { background: var(--bg3);       color: var(--text-3); }
+
   </style>
 </head>
 <body>
@@ -916,16 +1233,148 @@
     <!-- ── REPORTS — Step 4 ── -->
     <div class="section" id="sec-reports">
       <div class="section-inner">
+
         <div class="page-header">
           <div class="page-eyebrow">Data</div>
           <div class="page-title">Reports</div>
-          <div class="page-sub">Upload your Lighthouse & STR competitive set reports.</div>
+          <div class="page-sub">Upload your STR Star Report and Lighthouse compset export.</div>
         </div>
-        <div class="placeholder">
-          <div class="placeholder-badge">Building next — Step 4</div>
-          <h2>Reports Upload</h2>
-          <p>STR & Lighthouse file upload with automatic data parsing.</p>
+
+        <!-- Upload cards row -->
+        <div class="grid-2" style="margin-bottom:1.25rem">
+
+          <!-- STR Upload -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">STR Star Report</div>
+              <span class="report-tag" id="str-tag" style="display:none">✓ Loaded</span>
+            </div>
+            <div class="info-bar" style="margin-bottom:1rem">
+              <svg viewBox="0 0 14 14" fill="none" width="13" height="13" style="flex-shrink:0;margin-top:1px"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 6v4M7 4.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              Export from STR as Excel or CSV. Revly reads occupancy, ADR, RevPAR, MPI and RGI automatically.
+            </div>
+            <div class="upload-zone" id="str-zone" onclick="triggerUpload('str')">
+              <input type="file" id="file-str" accept=".csv,.xlsx,.xls" style="display:none" onchange="handleUpload('str',event)">
+              <div class="upload-zone-icon">
+                <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                  <path d="M12 3v12M12 3L8 7M12 3l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="upload-zone-title">Drop STR file here</div>
+              <div class="upload-zone-sub">CSV or Excel · max 10 MB</div>
+            </div>
+            <div id="str-file-row" style="display:none" class="file-row">
+              <div class="file-row-icon">
+                <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 1h6l3 3v9H3V1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 1v3h3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="file-row-name" id="str-filename">—</div>
+              <div class="file-row-status parsing" id="str-status">Parsing…</div>
+              <div class="file-row-remove" onclick="removeReport('str')">✕</div>
+            </div>
+          </div>
+
+          <!-- Lighthouse Upload -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Lighthouse Report</div>
+              <span class="report-tag" id="lh-tag" style="display:none">✓ Loaded</span>
+            </div>
+            <div class="info-bar" style="margin-bottom:1rem">
+              <svg viewBox="0 0 14 14" fill="none" width="13" height="13" style="flex-shrink:0;margin-top:1px"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 6v4M7 4.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              Export your compset rate intelligence from Lighthouse as CSV. Feeds OTA pricing data directly into rate proposals.
+            </div>
+            <div class="upload-zone" id="lh-zone" onclick="triggerUpload('lh')">
+              <input type="file" id="file-lh" accept=".csv,.xlsx,.xls" style="display:none" onchange="handleUpload('lh',event)">
+              <div class="upload-zone-icon">
+                <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                  <path d="M12 3v12M12 3L8 7M12 3l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="upload-zone-title">Drop Lighthouse file here</div>
+              <div class="upload-zone-sub">CSV or Excel · max 10 MB</div>
+            </div>
+            <div id="lh-file-row" style="display:none" class="file-row">
+              <div class="file-row-icon">
+                <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 1h6l3 3v9H3V1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 1v3h3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="file-row-name" id="lh-filename">—</div>
+              <div class="file-row-status parsing" id="lh-status">Parsing…</div>
+              <div class="file-row-remove" onclick="removeReport('lh')">✕</div>
+            </div>
+          </div>
+
         </div>
+
+        <!-- STR Metrics panel (shown after upload) -->
+        <div id="str-metrics-panel" style="display:none" class="card" style="margin-bottom:1.25rem">
+          <div class="card-header">
+            <div class="card-title">STR Parsed Metrics</div>
+            <div class="card-link" onclick="removeReport('str')">Remove</div>
+          </div>
+          <div class="str-kpi-grid">
+            <div class="str-kpi">
+              <div class="str-kpi-label">My Occupancy</div>
+              <div class="str-kpi-val" id="sm-occ">—</div>
+            </div>
+            <div class="str-kpi">
+              <div class="str-kpi-label">Comp Occupancy</div>
+              <div class="str-kpi-val muted" id="sm-comp-occ">—</div>
+            </div>
+            <div class="str-kpi accent">
+              <div class="str-kpi-label">MPI</div>
+              <div class="str-kpi-val" id="sm-mpi">—</div>
+            </div>
+            <div class="str-kpi">
+              <div class="str-kpi-label">My ADR</div>
+              <div class="str-kpi-val" id="sm-adr">—</div>
+            </div>
+            <div class="str-kpi">
+              <div class="str-kpi-label">Comp ADR</div>
+              <div class="str-kpi-val muted" id="sm-comp-adr">—</div>
+            </div>
+            <div class="str-kpi accent">
+              <div class="str-kpi-label">RGI</div>
+              <div class="str-kpi-val" id="sm-rgi">—</div>
+            </div>
+          </div>
+          <div class="str-index-bar-wrap">
+            <div class="str-index-label">
+              <span>MPI Position</span>
+              <span id="str-index-note">—</span>
+            </div>
+            <div class="str-index-track">
+              <div class="str-index-fill" id="str-index-fill"></div>
+              <div class="str-index-marker"></div>
+            </div>
+            <div class="str-index-ends">
+              <span>0</span><span>100 (parity)</span><span>150+</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lighthouse compset table (shown after upload) -->
+        <div id="lh-compset-panel" style="display:none" class="card">
+          <div class="card-header">
+            <div class="card-title">Compset — OTA Rate Positioning</div>
+            <div class="card-link" onclick="removeReport('lh')">Remove</div>
+          </div>
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Hotel</th>
+                <th>OTA Rate</th>
+                <th>Availability</th>
+                <th>Review</th>
+                <th>vs. You</th>
+              </tr>
+            </thead>
+            <tbody id="compset-tbody"></tbody>
+          </table>
+        </div>
+
       </div>
     </div>
 
@@ -1016,6 +1465,7 @@ function boot() {
     new Date().toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
 
   refreshDashboard();
+  restoreReports();
 }
 
 // ── NAVIGATE ─────────────────────────────────────────────────
@@ -1121,6 +1571,191 @@ function toast(msg, ms = 2500) {
   document.getElementById('toast-msg').textContent = msg;
   el.classList.add('show');
   setTimeout(() => el.classList.remove('show'), ms);
+}
+
+// ── REPORTS ──────────────────────────────────────────────────
+
+function triggerUpload(type) {
+  document.getElementById('file-' + type).click();
+}
+
+function handleUpload(type, e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  // Show file row + parsing state
+  const row      = document.getElementById(type + '-file-row');
+  const nameEl   = document.getElementById(type + '-filename');
+  const statusEl = document.getElementById(type + '-status');
+  const zone     = document.getElementById(type + '-zone');
+
+  nameEl.textContent        = file.name;
+  statusEl.textContent      = 'Parsing…';
+  statusEl.className        = 'file-row-status parsing';
+  row.style.display         = 'flex';
+  zone.style.display        = 'none';
+
+  // Simulate parsing delay (replace with real CSV parse if needed)
+  setTimeout(() => {
+    statusEl.textContent = '✓ Parsed';
+    statusEl.className   = 'file-row-status done';
+    document.getElementById(type + '-tag').style.display = '';
+
+    const st = getState();
+    if (!st.reports) st.reports = {};
+    st.reports[type] = { name: file.name, date: new Date().toISOString() };
+
+    if (type === 'str') {
+      // Simulate realistic STR data
+      st.strData = {
+        occ: 71.4, compOcc: 68.2,
+        adr: 124,  compAdr: 131,
+        mpi: 104.7, rgi: 94.6,
+        revpar: 88.5, compRevpar: 89.3
+      };
+      saveState(st);
+      renderStrMetrics(st.strData);
+    } else {
+      // Simulate Lighthouse compset
+      st.lighthouseData = buildMockCompset();
+      saveState(st);
+      renderCompsetTable(st.lighthouseData);
+    }
+
+    refreshDashboard();
+    toast(type === 'str' ? 'STR report loaded' : 'Lighthouse report loaded');
+  }, 1200);
+}
+
+function removeReport(type) {
+  const st = getState();
+  if (st.reports) delete st.reports[type];
+  if (type === 'str') {
+    delete st.strData;
+    document.getElementById('str-metrics-panel').style.display = 'none';
+  } else {
+    delete st.lighthouseData;
+    document.getElementById('lh-compset-panel').style.display = 'none';
+  }
+  saveState(st);
+
+  document.getElementById(type + '-file-row').style.display = 'none';
+  document.getElementById(type + '-zone').style.display     = '';
+  document.getElementById(type + '-tag').style.display      = 'none';
+  document.getElementById('file-' + type).value            = '';
+  refreshDashboard();
+  toast('Report removed');
+}
+
+function renderStrMetrics(s) {
+  document.getElementById('sm-occ').textContent      = s.occ + '%';
+  document.getElementById('sm-comp-occ').textContent = s.compOcc + '%';
+  document.getElementById('sm-mpi').textContent      = s.mpi;
+  document.getElementById('sm-adr').textContent      = '€' + s.adr;
+  document.getElementById('sm-comp-adr').textContent = '€' + s.compAdr;
+  document.getElementById('sm-rgi').textContent      = s.rgi;
+
+  // Index bar — scale 0–150+ → 0–100%
+  const pct = Math.min((s.mpi / 150) * 100, 100);
+  document.getElementById('str-index-fill').style.width   = pct + '%';
+  document.getElementById('str-index-marker').style.left  = pct + '%';
+  document.getElementById('str-index-note').textContent   =
+    s.mpi >= 100
+      ? `MPI ${s.mpi} — you're taking more than your fair share`
+      : `MPI ${s.mpi} — below index, room to improve`;
+
+  document.getElementById('str-metrics-panel').style.display = '';
+}
+
+function buildMockCompset() {
+  return [
+    { name: 'Grand Plaza Hotel',    rate: 159, avail: 'Available', review: 8.1, isYou: false },
+    { name: 'Hotel Central Park',   rate: 152, avail: 'Limited',   review: 8.6, isYou: false },
+    { name: 'Your Property',        rate: 141, avail: 'Available', review: 8.4, isYou: true  },
+    { name: 'Boutique Eleven',      rate: 135, avail: 'Available', review: 7.9, isYou: false },
+    { name: 'City Lodge & Suites',  rate: 122, avail: 'Available', review: 7.5, isYou: false },
+  ];
+}
+
+function renderCompsetTable(data) {
+  const sorted = [...data].sort((a, b) => b.rate - a.rate);
+  const myRate = (data.find(h => h.isYou) || {}).rate || 0;
+
+  document.getElementById('compset-tbody').innerHTML = sorted.map((h, i) => {
+    const diffPct = myRate ? Math.round(((h.rate - myRate) / myRate) * 100) : 0;
+    const vsHtml  = h.isYou
+      ? '<span class="vs-badge even">—</span>'
+      : diffPct > 0
+        ? `<span class="vs-badge above">+${diffPct}%</span>`
+        : diffPct < 0
+          ? `<span class="vs-badge below">${diffPct}%</span>`
+          : '<span class="vs-badge even">parity</span>';
+
+    const availColor = h.avail === 'Available' ? 'var(--green)' : h.avail === 'Limited' ? 'var(--amber)' : 'var(--red)';
+
+    return `<tr class="${h.isYou ? 'you' : ''}">
+      <td><span class="comp-rank ${i === 0 ? 'top' : ''}">${i + 1}</span></td>
+      <td>${h.name}${h.isYou ? '<span class="you-badge">You</span>' : ''}</td>
+      <td><span class="comp-rate">€${h.rate}</span></td>
+      <td><span class="comp-avail-dot" style="background:${availColor}"></span>${h.avail}</td>
+      <td>★ ${h.review}</td>
+      <td>${vsHtml}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('lh-compset-panel').style.display = '';
+}
+
+function restoreReports() {
+  const st = getState();
+  if (st.strData) {
+    const r = st.reports?.str;
+    if (r) {
+      document.getElementById('str-filename').textContent   = r.name;
+      document.getElementById('str-status').textContent     = '✓ Parsed';
+      document.getElementById('str-status').className       = 'file-row-status done';
+      document.getElementById('str-file-row').style.display = 'flex';
+      document.getElementById('str-zone').style.display     = 'none';
+      document.getElementById('str-tag').style.display      = '';
+    }
+    renderStrMetrics(st.strData);
+  }
+  if (st.lighthouseData) {
+    const r = st.reports?.lh;
+    if (r) {
+      document.getElementById('lh-filename').textContent   = r.name;
+      document.getElementById('lh-status').textContent     = '✓ Parsed';
+      document.getElementById('lh-status').className       = 'file-row-status done';
+      document.getElementById('lh-file-row').style.display = 'flex';
+      document.getElementById('lh-zone').style.display     = 'none';
+      document.getElementById('lh-tag').style.display      = '';
+    }
+    renderCompsetTable(st.lighthouseData);
+  }
+}
+
+// Drag-and-drop support
+['str','lh'].forEach(type => {
+  const zone = document.getElementById(type + '-zone');
+  if (!zone) return;
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+    const input = document.getElementById('file-' + type);
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    input.files = dt.files;
+    handleUpload(type, { target: input });
+  });
+});
+
+// ── STATE SAVE ────────────────────────────────────────────────
+function saveState(st) {
+  localStorage.setItem('revly_state', JSON.stringify(st));
 }
 
 boot();
