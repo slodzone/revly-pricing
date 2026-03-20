@@ -10,19 +10,20 @@
   <style>
     /* ─── TOKENS ─────────────────────────────────────── */
     :root {
-      --bg:        #0e0f11;
-      --bg2:       #141518;
-      --bg3:       #1a1c20;
-      --border:    rgba(255,255,255,0.07);
-      --border-hi: rgba(255,255,255,0.14);
-      --amber:     #f5a623;
-      --amber-dim: rgba(245,166,35,0.18);
-      --amber-glow:rgba(245,166,35,0.06);
-      --text:      #f0ede8;
-      --text-2:    #8b8d93;
-      --text-3:    #4a4c52;
-      --green:     #3ecf8e;
-      --red:       #f26b6b;
+      --bg:        #0f0a0c;
+      --bg2:       #160d10;
+      --bg3:       #1e1116;
+      --border:    rgba(201,168,76,0.1);
+      --border-hi: rgba(201,168,76,0.22);
+      --amber:     #C9A84C;
+      --amber-dim: rgba(201,168,76,0.16);
+      --amber-glow:rgba(201,168,76,0.06);
+      --crimson:   #AA0A3B;
+      --text:      #f2ede6;
+      --text-2:    #9c8a80;
+      --text-3:    #5a4840;
+      --green:     #4ab87a;
+      --red:       #e05a6a;
       --font-display: 'Syne', sans-serif;
       --font-body:    'Inter', sans-serif;
       --font-mono:    'JetBrains Mono', monospace;
@@ -80,7 +81,7 @@
     .wordmark-icon {
       width: 32px;
       height: 32px;
-      background: var(--amber);
+      background: var(--crimson);
       border-radius: 6px;
       display: flex;
       align-items: center;
@@ -117,7 +118,7 @@
     }
 
     .metric-card {
-      background: rgba(20,21,24,0.85);
+      background: rgba(22,13,16,0.88);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 1.1rem 1.4rem;
@@ -142,7 +143,7 @@
       flex-shrink: 0;
     }
 
-    .metric-dot.amber { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+    .metric-dot.amber { background: var(--crimson); box-shadow: 0 0 6px var(--crimson); }
     .metric-dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
     .metric-dot.red   { background: var(--red);   box-shadow: 0 0 6px var(--red); }
 
@@ -245,9 +246,9 @@
     }
 
     .tab.active {
-      background: var(--bg3);
+      background: rgba(170,10,59,0.12);
       color: var(--text);
-      border: 1px solid var(--border-hi);
+      border: 1px solid rgba(170,10,59,0.3);
     }
 
     /* Fields */
@@ -288,8 +289,8 @@
     input::placeholder { color: var(--text-3); }
 
     input:focus, select:focus {
-      border-color: var(--amber);
-      box-shadow: 0 0 0 3px rgba(245,166,35,0.1);
+      border-color: var(--crimson);
+      box-shadow: 0 0 0 3px rgba(170,10,59,0.12);
     }
 
     select option { background: var(--bg2); }
@@ -307,8 +308,8 @@
       width: 100%;
       margin-top: 0.75rem;
       padding: 0.85rem 1.5rem;
-      background: var(--amber);
-      color: #0e0f11;
+      background: var(--crimson);
+      color: #f2ede6;
       font-family: var(--font-display);
       font-size: 0.88rem;
       font-weight: 700;
@@ -331,7 +332,7 @@
 
     .btn-submit:hover {
       opacity: 0.92;
-      box-shadow: 0 4px 24px rgba(245,166,35,0.35);
+      box-shadow: 0 4px 24px rgba(170,10,59,0.4);
     }
 
     .btn-submit:active {
@@ -453,8 +454,8 @@
       <div class="wordmark">
         <div class="wordmark-icon">
           <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 14L7 9L10 12L14 6" stroke="#0e0f11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="14" cy="6" r="1.5" fill="#0e0f11"/>
+            <path d="M3 14L7 9L10 12L14 6" stroke="#f2ede6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="14" cy="6" r="1.5" fill="#f2ede6"/>
           </svg>
         </div>
         <span class="wordmark-text">Revly</span>
@@ -606,7 +607,7 @@
   const ctx = canvas.getContext('2d');
   let W, H, cols, rows, cells = [], frame = 0;
 
-  const AMBER = 'rgba(245,166,35,';
+  const AMBER = 'rgba(201,168,76,';
   const WHITE = 'rgba(255,255,255,';
   const CELL = 48;
 
@@ -670,8 +671,8 @@
 
     // Subtle radial vignette
     const grad = ctx.createRadialGradient(W*0.4, H*0.5, 0, W*0.4, H*0.5, W*0.7);
-    grad.addColorStop(0, 'rgba(245,166,35,0.04)');
-    grad.addColorStop(1, 'rgba(14,15,17,0.6)');
+    grad.addColorStop(0, 'rgba(170,10,59,0.06)');
+    grad.addColorStop(1, 'rgba(15,10,12,0.65)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
 
