@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Revly — App</title>
+  <style>
+    body { background: #0e0f11; color: #f0ede8; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+    p { color: #8b8d93; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <p>App shell — coming in Step 3.</p>
+  <script>
+    // If no session, go back to login
+    if (!localStorage.getItem('revly_session')) window.location.href = 'index.html';
+  </script>
+</body>
+</html>
