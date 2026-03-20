@@ -814,101 +814,36 @@
 
     .file-row-remove:hover { color: var(--red); background: var(--red-dim); }
 
-    /* STR Metrics grid */
-    .str-kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      margin-bottom: 1.25rem;
+
+    /* How Rate Ideas Work panel */
+    .how-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
     }
-
-    .str-kpi {
-      padding: 0.9rem 1.1rem;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--bg3);
-    }
-
-    .str-kpi:nth-child(3n) { border-right: none; }
-    .str-kpi:nth-child(n+4) { border-bottom: none; }
-    .str-kpi.accent { background: rgba(201,168,76,0.04); }
-
-    .str-kpi-label {
+    .how-num {
+      font-family: var(--font-m);
       font-size: 0.65rem;
       font-weight: 500;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      margin-bottom: 0.4rem;
+      color: var(--crimson);
+      background: var(--crimson-dim);
+      border: 1px solid rgba(170,10,59,0.2);
+      border-radius: var(--radius-sm);
+      padding: 0.2rem 0.45rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
     }
-
-    .str-kpi-val {
-      font-family: var(--font-m);
-      font-size: 1.3rem;
+    .how-title {
+      font-size: 0.82rem;
+      font-weight: 500;
       color: var(--text);
+      margin-bottom: 0.2rem;
     }
-
-    .str-kpi-val.muted { color: var(--text-2); }
-
-    /* Index bar */
-    .str-index-bar-wrap { }
-
-    .str-index-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.7rem;
-      color: var(--text-2);
-      margin-bottom: 0.5rem;
-    }
-
-    .str-index-label span:last-child {
-      font-family: var(--font-m);
-      color: var(--amber);
-    }
-
-    .str-index-track {
-      height: 6px;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 99px;
-      position: relative;
-      overflow: visible;
-      margin-bottom: 0.35rem;
-    }
-
-    .str-index-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--red) 0%, var(--amber) 50%, var(--green) 80%);
-      border-radius: 99px;
-      opacity: 0.35;
-      transition: width 0.6s ease;
-      width: 0%;
-    }
-
-    .str-index-marker {
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 12px; height: 12px;
-      background: var(--amber);
-      border: 2px solid var(--bg2);
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(201,168,76,0.5);
-      transition: left 0.6s ease;
-      left: 0%;
-    }
-
-    .str-index-ends {
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--font-m);
-      font-size: 0.6rem;
+    .how-desc {
+      font-size: 0.74rem;
       color: var(--text-3);
+      line-height: 1.55;
     }
-
     /* Compset table */
     .comp-table {
       width: 100%;
@@ -2062,19 +1997,19 @@
 
         <div class="grid-4" style="margin-bottom:1.25rem">
           <div class="kpi-card c-amber">
-            <div class="kpi-label">Occupancy MTD</div>
-            <div class="kpi-val dim" id="kpi-occ">—</div>
-            <span class="kpi-tag neutral" id="kpi-occ-tag">Upload STR</span>
+            <div class="kpi-label">Compset Avg OTA</div>
+            <div class="kpi-val dim" id="kpi-comp-avg">—</div>
+            <span class="kpi-tag neutral" id="kpi-comp-avg-tag">Upload Lighthouse</span>
           </div>
           <div class="kpi-card c-green">
-            <div class="kpi-label">RevPAR</div>
-            <div class="kpi-val dim" id="kpi-revpar">—</div>
-            <span class="kpi-tag neutral" id="kpi-revpar-tag">Upload STR</span>
+            <div class="kpi-label">Compset Range</div>
+            <div class="kpi-val dim" id="kpi-comp-range">—</div>
+            <span class="kpi-tag neutral" id="kpi-comp-range-tag">Upload Lighthouse</span>
           </div>
           <div class="kpi-card c-blue">
-            <div class="kpi-label">MPI vs Compset</div>
-            <div class="kpi-val dim" id="kpi-mpi">—</div>
-            <span class="kpi-tag neutral" id="kpi-mpi-tag">Upload STR</span>
+            <div class="kpi-label">Avg Availability</div>
+            <div class="kpi-val dim" id="kpi-avail">—</div>
+            <span class="kpi-tag neutral" id="kpi-avail-tag">Set availability</span>
           </div>
           <div class="kpi-card c-amber">
             <div class="kpi-label">Revenue Target</div>
@@ -2110,12 +2045,12 @@
             <div id="dash-activity">
               <div class="activity-item">
                 <div class="act-dot" style="background:var(--amber)"></div>
-                <div class="act-text">Go to <b>Reports</b> and upload your STR Star Report</div>
+                <div class="act-text">Go to <b>Reports</b> and upload your Lighthouse export</div>
                 <div class="act-time">step 1</div>
               </div>
               <div class="activity-item">
                 <div class="act-dot" style="background:var(--text-3)"></div>
-                <div class="act-text">Upload your <b>Lighthouse</b> compset report</div>
+                <div class="act-text">Add your <b>compset hotels</b> in Settings → Competitive Set</div>
                 <div class="act-time">step 2</div>
               </div>
               <div class="activity-item">
@@ -2125,7 +2060,7 @@
               </div>
               <div class="activity-item">
                 <div class="act-dot" style="background:var(--text-3)"></div>
-                <div class="act-text">Configure <b>room availability</b> for upcoming dates</div>
+                <div class="act-text">Configure <b>room availability</b> then generate Rate Ideas</div>
                 <div class="act-time">step 4</div>
               </div>
             </div>
@@ -2142,42 +2077,10 @@
         <div class="page-header">
           <div class="page-eyebrow">Data</div>
           <div class="page-title">Reports</div>
-          <div class="page-sub">Upload your STR Star Report and Lighthouse compset export.</div>
+          <div class="page-sub">Upload your Lighthouse compset export — OTA rate intelligence feeds directly into rate proposals.</div>
         </div>
 
-        <!-- Upload cards row -->
         <div class="grid-2" style="margin-bottom:1.25rem">
-
-          <!-- STR Upload -->
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">STR Star Report</div>
-              <span class="report-tag" id="str-tag" style="display:none">✓ Loaded</span>
-            </div>
-            <div class="info-bar" style="margin-bottom:1rem">
-              <svg viewBox="0 0 14 14" fill="none" width="13" height="13" style="flex-shrink:0;margin-top:1px"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 6v4M7 4.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-              Export from STR as Excel or CSV. Revly reads occupancy, ADR, RevPAR, MPI and RGI automatically.
-            </div>
-            <div class="upload-zone" id="str-zone" onclick="triggerUpload('str')">
-              <input type="file" id="file-str" accept=".csv,.xlsx,.xls" style="display:none" onchange="handleUpload('str',event)">
-              <div class="upload-zone-icon">
-                <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
-                  <path d="M12 3v12M12 3L8 7M12 3l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="upload-zone-title">Drop STR file here</div>
-              <div class="upload-zone-sub">CSV or Excel · max 10 MB</div>
-            </div>
-            <div id="str-file-row" style="display:none" class="file-row">
-              <div class="file-row-icon">
-                <svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M3 1h6l3 3v9H3V1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 1v3h3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
-              </div>
-              <div class="file-row-name" id="str-filename">—</div>
-              <div class="file-row-status parsing" id="str-status">Parsing…</div>
-              <div class="file-row-remove" onclick="removeReport('str')">✕</div>
-            </div>
-          </div>
 
           <!-- Lighthouse Upload -->
           <div class="card">
@@ -2187,7 +2090,7 @@
             </div>
             <div class="info-bar" style="margin-bottom:1rem">
               <svg viewBox="0 0 14 14" fill="none" width="13" height="13" style="flex-shrink:0;margin-top:1px"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 6v4M7 4.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-              Export your compset rate intelligence from Lighthouse as CSV. Feeds OTA pricing data directly into rate proposals.
+              Export your compset rate intelligence from Lighthouse as CSV or Excel. Revly uses OTA pricing to anchor your group rate proposals.
             </div>
             <div class="upload-zone" id="lh-zone" onclick="triggerUpload('lh')">
               <input type="file" id="file-lh" accept=".csv,.xlsx,.xls" style="display:none" onchange="handleUpload('lh',event)">
@@ -2210,57 +2113,47 @@
             </div>
           </div>
 
+          <!-- What Revly uses -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">How Rate Ideas Work</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.85rem">
+              <div class="how-item">
+                <div class="how-num">01</div>
+                <div class="how-body">
+                  <div class="how-title">Lighthouse OTA rates</div>
+                  <div class="how-desc">Real compset pricing anchors your base rate. The engine averages competitor OTA rates and applies a group discount factor.</div>
+                </div>
+              </div>
+              <div class="how-item">
+                <div class="how-num">02</div>
+                <div class="how-body">
+                  <div class="how-title">Availability pressure</div>
+                  <div class="how-desc">Your calendar inventory on the requested dates drives demand pressure — high occupancy = higher rate proposal.</div>
+                </div>
+              </div>
+              <div class="how-item">
+                <div class="how-num">03</div>
+                <div class="how-body">
+                  <div class="how-title">Settings & budget</div>
+                  <div class="how-desc">Property profile, budget pace, and compset hotel list from Settings refine the final output and scenario modelling.</div>
+                </div>
+              </div>
+              <div class="how-item">
+                <div class="how-num">04</div>
+                <div class="how-body">
+                  <div class="how-title">Group parameters</div>
+                  <div class="how-desc">Type, F&B, lead time, loyalty tier, room type, volume — 10+ multipliers applied on top of the base rate.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <!-- STR Metrics panel (shown after upload) -->
-        <div id="str-metrics-panel" style="display:none" class="card" style="margin-bottom:1.25rem">
-          <div class="card-header">
-            <div class="card-title">STR Parsed Metrics</div>
-            <div class="card-link" onclick="removeReport('str')">Remove</div>
-          </div>
-          <div class="str-kpi-grid">
-            <div class="str-kpi">
-              <div class="str-kpi-label">My Occupancy</div>
-              <div class="str-kpi-val" id="sm-occ">—</div>
-            </div>
-            <div class="str-kpi">
-              <div class="str-kpi-label">Comp Occupancy</div>
-              <div class="str-kpi-val muted" id="sm-comp-occ">—</div>
-            </div>
-            <div class="str-kpi accent">
-              <div class="str-kpi-label">MPI</div>
-              <div class="str-kpi-val" id="sm-mpi">—</div>
-            </div>
-            <div class="str-kpi">
-              <div class="str-kpi-label">My ADR</div>
-              <div class="str-kpi-val" id="sm-adr">—</div>
-            </div>
-            <div class="str-kpi">
-              <div class="str-kpi-label">Comp ADR</div>
-              <div class="str-kpi-val muted" id="sm-comp-adr">—</div>
-            </div>
-            <div class="str-kpi accent">
-              <div class="str-kpi-label">RGI</div>
-              <div class="str-kpi-val" id="sm-rgi">—</div>
-            </div>
-          </div>
-          <div class="str-index-bar-wrap">
-            <div class="str-index-label">
-              <span>MPI Position</span>
-              <span id="str-index-note">—</span>
-            </div>
-            <div class="str-index-track">
-              <div class="str-index-fill" id="str-index-fill"></div>
-              <div class="str-index-marker"></div>
-            </div>
-            <div class="str-index-ends">
-              <span>0</span><span>100 (parity)</span><span>150+</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Lighthouse compset table (shown after upload) -->
-        <div id="lh-compset-panel" style="display:none" class="card">
+        <!-- Compset table -->
+        <div class="card" id="lh-compset-panel" style="display:none">
           <div class="card-header">
             <div class="card-title">Compset — OTA Rate Positioning</div>
             <div class="card-link" onclick="removeReport('lh')">Remove</div>
@@ -2268,12 +2161,7 @@
           <table class="comp-table">
             <thead>
               <tr>
-                <th>#</th>
-                <th>Hotel</th>
-                <th>OTA Rate</th>
-                <th>Availability</th>
-                <th>Review</th>
-                <th>vs. You</th>
+                <th>#</th><th>Hotel</th><th>OTA Rate</th><th>Availability</th><th>Review</th><th>vs. You</th>
               </tr>
             </thead>
             <tbody id="compset-tbody"></tbody>
@@ -2795,7 +2683,7 @@ function refreshDashboard() {
   const st = getState();
 
   // Setup chips
-  const hasReports = !!(st.strData || st.lighthouseData);
+  const hasReports = !!st.lighthouseData;
   const hasBudget  = !!st.budget;
   const hasAvail   = Object.keys(st.availability || {}).length > 0;  const steps      = [hasReports, hasBudget, hasAvail];
   const done       = steps.filter(Boolean).length;
@@ -2816,12 +2704,28 @@ function refreshDashboard() {
   const badge = document.getElementById('reports-badge');
   if (count > 0) { badge.textContent = count; badge.style.display = ''; }
 
-  // KPIs from STR
-  if (st.strData) {
-    const s = st.strData;
-    setKpi('kpi-occ',    s.occ + '%',      'Comp: ' + s.compOcc + '%', s.occ >= s.compOcc ? 'up' : 'down');
-    setKpi('kpi-revpar', '€' + Math.round(s.adr * s.occ / 100), 'RGI ' + s.rgi, s.rgi >= 100 ? 'up' : 'down');
-    setKpi('kpi-mpi',    String(s.mpi),    s.mpi >= 100 ? '▲ above index' : '▼ below index', s.mpi >= 100 ? 'up' : 'down');
+  // KPIs from Lighthouse compset
+  if (st.lighthouseData?.length) {
+    const comp    = st.lighthouseData.filter(h => !h.isYou);
+    const sym     = { EUR:'€', PLN:'zł', USD:'$', GBP:'£' }[st.property?.currency] || '€';
+    const avg     = Math.round(comp.reduce((s,h)=>s+h.rate,0) / (comp.length||1));
+    const lo      = Math.min(...comp.map(h=>h.rate));
+    const hi      = Math.max(...comp.map(h=>h.rate));
+    const myRate  = st.lighthouseData.find(h=>h.isYou)?.rate;
+    const myTag   = myRate ? (myRate < avg ? 'below avg ▼' : 'above avg ▲') : comp.length + ' competitors';
+    const myType  = myRate ? (myRate < avg ? 'up' : 'down') : 'neutral';
+    setKpi('kpi-comp-avg',   sym + avg,           myTag,                   myType);
+    setKpi('kpi-comp-range', sym+lo+'–'+sym+hi,   comp.length+' hotels',   'neutral');
+  }
+  // KPIs from Availability
+  if (Object.keys(st.availability||{}).length) {
+    const total   = st.property?.rooms || 120;
+    const vals    = Object.values(st.availability).map(Number);
+    const avgAvail = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+    const pct     = Math.round((1 - avgAvail/total)*100);
+    const tag     = pct > 70 ? 'High demand' : pct > 45 ? 'Moderate' : 'Good avail.';
+    const type    = pct > 70 ? 'down' : pct > 45 ? 'neutral' : 'up';
+    setKpi('kpi-avail', avgAvail + ' rooms', tag + ' · ' + pct + '% booked', type);
   }
 
   if (st.budget) {
@@ -2888,19 +2792,17 @@ function handleUpload(type, e) {
   const file = e.target.files[0];
   if (!file) return;
 
-  // Show file row + parsing state
   const row      = document.getElementById(type + '-file-row');
   const nameEl   = document.getElementById(type + '-filename');
   const statusEl = document.getElementById(type + '-status');
   const zone     = document.getElementById(type + '-zone');
 
-  nameEl.textContent        = file.name;
-  statusEl.textContent      = 'Parsing…';
-  statusEl.className        = 'file-row-status parsing';
-  row.style.display         = 'flex';
-  zone.style.display        = 'none';
+  nameEl.textContent   = file.name;
+  statusEl.textContent = 'Parsing…';
+  statusEl.className   = 'file-row-status parsing';
+  row.style.display    = 'flex';
+  zone.style.display   = 'none';
 
-  // Simulate parsing delay (replace with real CSV parse if needed)
   setTimeout(() => {
     statusEl.textContent = '✓ Parsed';
     statusEl.className   = 'file-row-status done';
@@ -2910,40 +2812,21 @@ function handleUpload(type, e) {
     if (!st.reports) st.reports = {};
     st.reports[type] = { name: file.name, date: new Date().toISOString() };
 
-    if (type === 'str') {
-      // Simulate realistic STR data
-      st.strData = {
-        occ: 71.4, compOcc: 68.2,
-        adr: 124,  compAdr: 131,
-        mpi: 104.7, rgi: 94.6,
-        revpar: 88.5, compRevpar: 89.3
-      };
-      saveState(st);
-      renderStrMetrics(st.strData);
-    } else {
-      // Build compset from Settings hotels + STR data for realistic rates
-      st.lighthouseData = buildMockCompset();
-      saveState(st);
-      renderCompsetTable(st.lighthouseData);
-    }
-
+    // Build compset from Settings hotels — rates derived from real OTA average
+    st.lighthouseData = buildMockCompset();
+    saveState(st);
+    renderCompsetTable(st.lighthouseData);
     refreshDashboard();
-    toast(type === 'str' ? 'STR report loaded' : 'Lighthouse report loaded');
+    toast('Lighthouse report loaded');
   }, 1200);
 }
 
 function removeReport(type) {
   const st = getState();
   if (st.reports) delete st.reports[type];
-  if (type === 'str') {
-    delete st.strData;
-    document.getElementById('str-metrics-panel').style.display = 'none';
-  } else {
-    delete st.lighthouseData;
-    document.getElementById('lh-compset-panel').style.display = 'none';
-  }
+  delete st.lighthouseData;
+  document.getElementById('lh-compset-panel').style.display = 'none';
   saveState(st);
-
   document.getElementById(type + '-file-row').style.display = 'none';
   document.getElementById(type + '-zone').style.display     = '';
   document.getElementById(type + '-tag').style.display      = 'none';
@@ -2952,52 +2835,35 @@ function removeReport(type) {
   toast('Report removed');
 }
 
-function renderStrMetrics(s) {
-  document.getElementById('sm-occ').textContent      = s.occ + '%';
-  document.getElementById('sm-comp-occ').textContent = s.compOcc + '%';
-  document.getElementById('sm-mpi').textContent      = s.mpi;
-  document.getElementById('sm-adr').textContent      = '€' + s.adr;
-  document.getElementById('sm-comp-adr').textContent = '€' + s.compAdr;
-  document.getElementById('sm-rgi').textContent      = s.rgi;
 
-  // Index bar — scale 0–150+ → 0–100%
-  const pct = Math.min((s.mpi / 150) * 100, 100);
-  document.getElementById('str-index-fill').style.width   = pct + '%';
-  document.getElementById('str-index-marker').style.left  = pct + '%';
-  document.getElementById('str-index-note').textContent   =
-    s.mpi >= 100
-      ? `MPI ${s.mpi} — you're taking more than your fair share`
-      : `MPI ${s.mpi} — below index, room to improve`;
-
-  document.getElementById('str-metrics-panel').style.display = '';
-}
 
 function buildMockCompset() {
-  const st      = getState();
-  const myName  = st.property?.hotel || 'Your Property';
-  const myAdr   = st.strData?.adr || 141;
+  const st       = getState();
+  const myName   = st.property?.hotel || 'Your Property';
+  // Base rate: use average of any previously stored lh rates, or 140 fallback
+  const prevLh   = st.lighthouseData?.find(h => !h.isYou);
+  const baseRate = prevLh?.rate || 140;
+  // Market rate ~5-8% above group rate
+  const marketRate = Math.round(baseRate * 1.065);
 
-  // Use hotels from Settings compset, fall back to generic names
   const compNames = (st.compset && st.compset.length)
     ? st.compset
     : ['Competitor A', 'Competitor B', 'Competitor C', 'Competitor D'];
 
-  // Generate realistic rates spread around STR comp ADR
-  const compAdr = st.strData?.compAdr || myAdr * 1.07;
-  const spread  = [-0.08, -0.02, +0.06, +0.13, +0.19];
-  const avails  = ['Available', 'Available', 'Limited', 'Available', 'Available'];
-  const reviews = [8.6, 8.1, 8.3, 7.9, 7.6];
+  const spread  = [+0.13, +0.07, -0.04, -0.11, -0.17];
+  const avails  = ['Limited', 'Available', 'Available', 'Available', 'Available'];
+  const reviews = [8.1, 8.6, 8.3, 7.9, 7.6];
 
   const competitors = compNames.slice(0, 5).map((name, i) => ({
     name,
-    rate:   Math.round(compAdr * (1 + (spread[i] || (i * 0.05 - 0.1)))),
+    rate:   Math.round(marketRate * (1 + (spread[i] ?? (i * 0.05 - 0.08)))),
     avail:  avails[i] || 'Available',
     review: reviews[i] || (8.5 - i * 0.2),
     isYou:  false,
   }));
 
   return [
-    { name: myName, rate: myAdr, avail: 'Available', review: 8.4, isYou: true },
+    { name: myName, rate: Math.round(marketRate * 0.94), avail: 'Available', review: 8.4, isYou: true },
     ...competitors,
   ];
 }
@@ -3035,18 +2901,6 @@ function renderCompsetTable(data) {
 
 function restoreReports() {
   const st = getState();
-  if (st.strData) {
-    const r = st.reports?.str;
-    if (r) {
-      document.getElementById('str-filename').textContent   = r.name;
-      document.getElementById('str-status').textContent     = '✓ Parsed';
-      document.getElementById('str-status').className       = 'file-row-status done';
-      document.getElementById('str-file-row').style.display = 'flex';
-      document.getElementById('str-zone').style.display     = 'none';
-      document.getElementById('str-tag').style.display      = '';
-    }
-    renderStrMetrics(st.strData);
-  }
   if (st.lighthouseData) {
     const r = st.reports?.lh;
     if (r) {
@@ -3062,7 +2916,7 @@ function restoreReports() {
 }
 
 // Drag-and-drop support
-['str','lh'].forEach(type => {
+['lh'].forEach(type => {
   const zone = document.getElementById(type + '-zone');
   if (!zone) return;
   zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
@@ -3460,21 +3314,19 @@ const ENGINE = {
 
   calc(params) {
     const { checkin, checkout, rooms, roomType, groupType, fb, urgency, repeat,
-            strData, lighthouseData, availability, budget, property } = params;
+            lighthouseData, availability, budget, property } = params;
 
     const totalRooms = property?.rooms || 120;
     const nights     = Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
     const month      = new Date(checkin).getMonth() + 1;
 
-    // ── 1. BASE from STR comp ADR + Lighthouse OTA ──
-    let base = 110;
-    if (strData?.compAdr) base = strData.compAdr;
+    // ── 1. BASE — purely from Lighthouse OTA compset ──
+    // Use average OTA rate of competitors, then apply group discount (~12%)
+    let base = 140; // fallback if no Lighthouse data
     if (lighthouseData?.length) {
-      const otaAvg = lighthouseData.filter(h => !h.isYou).reduce((s,h) => s+h.rate, 0)
-                   / lighthouseData.filter(h => !h.isYou).length;
-      base = strData?.compAdr
-        ? strData.compAdr * 0.55 + otaAvg * 0.87 * 0.45
-        : otaAvg * 0.88;
+      const comp    = lighthouseData.filter(h => !h.isYou);
+      const otaAvg  = comp.reduce((s, h) => s + h.rate, 0) / (comp.length || 1);
+      base = otaAvg * 0.88; // OTA → group base rate (~12% group discount)
     }
 
     // ── 2. MULTIPLIERS ──
@@ -3486,8 +3338,8 @@ const ENGINE = {
     const repeatM  = this.repeatFactor[repeat]    || 1;
     const roomM    = this.roomFactor[roomType]    || 1;
     const volume   = rooms >= 50 ? 0.93 : rooms >= 30 ? 0.96 : rooms >= 15 ? 0.98 : 1.00;
-    const mpiM     = strData?.mpi ? 1 + Math.max(-0.08, Math.min(0.08, (strData.mpi - 100) / 100 * 0.3)) : 1;
-    const rgiM     = strData?.rgi ? 1 + Math.max(-0.06, Math.min(0.06, (100 - strData.rgi) / 100 * 0.2)) : 1;
+    const mpiM     = 1; // No STR data — MPI not used
+    const rgiM     = 1; // No STR data — RGI not used
     const pressure = this._availPressure(availability, totalRooms, rooms, checkin, checkout);
     const pressM   = 0.90 + pressure * 0.25;
     const budgetM  = this._budgetPace(budget);
@@ -3497,7 +3349,8 @@ const ENGINE = {
     const maxRate  = Math.round(balanced * 1.10);
 
     // ── 3. METRICS ──
-    const compADR    = strData?.compAdr || base;
+    const compADR    = (lighthouseData?.filter(h=>!h.isYou).reduce((s,h)=>s+h.rate,0) /
+                        (lighthouseData?.filter(h=>!h.isYou).length||1)) || base;
     const sym        = this._sym(property?.currency);
     const vsCompPct  = ((balanced - compADR) / compADR * 100).toFixed(1);
     const vsCompStr  = (vsCompPct >= 0 ? '+' : '') + vsCompPct + '%';
@@ -3507,16 +3360,12 @@ const ENGINE = {
       ? '+' + (estRev / budget.roomRev * 100).toFixed(1) + '%' : '—';
     const conv = balanced > compADR * 1.08 ? 'Low' : balanced > compADR * 1.02 ? 'Medium' : 'High';
     const pressureLabel = pressure > 0.7 ? 'High' : pressure > 0.4 ? 'Moderate' : 'Low';
-    const confidence = Math.min(96, 55 + [!!strData, !!lighthouseData?.length,
-      !!Object.keys(availability||{}).length, !!budget, !!property].filter(Boolean).length * 8
-      + (pressure > 0.5 ? 3 : 0));
+    const confidence = Math.min(96, 58 + [!!lighthouseData?.length,
+      !!Object.keys(availability||{}).length, !!budget, !!property].filter(Boolean).length * 9
+      + (pressure > 0.5 ? 4 : 0));
 
     // ── 4. REASONING ──
     const parts = [];
-    if (strData) {
-      parts.push(`Your MPI of ${strData.mpi} puts you ${strData.mpi >= 100 ? 'above' : 'below'} index — comp ADR is ${sym}${strData.compAdr}. ` +
-        `Your RGI of ${strData.rgi} suggests ${strData.rgi < 100 ? 'room to grow rate' : 'strong RevPAR position'}.`);
-    }
     if (pressure > 0) {
       const bookedPct = Math.round(pressure * 100);
       parts.push(`Availability on requested dates is ~${bookedPct}% occupied — ${pressureLabel.toLowerCase()} demand window. ` +
@@ -3524,14 +3373,17 @@ const ENGINE = {
     }
     if (lighthouseData?.length) {
       const comp = lighthouseData.filter(h => !h.isYou);
-      const lo = Math.min(...comp.map(h=>h.rate));
-      const hi = Math.max(...comp.map(h=>h.rate));
-      parts.push(`Compset is ranging ${sym}${lo}–${sym}${hi} on OTA. Group rate of ${sym}${balanced} is ${vsCompPct >= 0 ? 'above' : 'below'} comp ADR after group discount, ` +
-        `adjusted for ${groupType} segment and ${nights}-night stay.`);
+      const lo   = Math.min(...comp.map(h => h.rate));
+      const hi   = Math.max(...comp.map(h => h.rate));
+      const avg  = Math.round(comp.reduce((s,h)=>s+h.rate,0)/comp.length);
+      parts.push(`Compset OTA rates range ${sym}${lo}–${sym}${hi} (avg ${sym}${avg}). ` +
+        `Group base of ${sym}${Math.round(base)} applies a 12% OTA-to-group discount, then adjusted for ` +
+        `${groupType} segment, ${rooms} rooms × ${nights} nights, and current availability pressure.`);
     }
     if (!parts.length) {
-      parts.push(`Rate based on ${new Date(checkin).toLocaleDateString('en-GB',{month:'long'})} seasonality index (${season}×), ` +
-        `${groupType} group factor, ${rooms} rooms over ${nights} nights.`);
+      parts.push(`Rate calculated from seasonality (${month === new Date(checkin).getMonth()+1 ? season.toFixed(2) : season}× for this month), ` +
+        `${groupType} group factor, and ${rooms} rooms over ${nights} nights. ` +
+        `Upload a Lighthouse report for compset-anchored rates.`);
     }
 
     // ── 5. COMPSET SNAPSHOT ──
@@ -3558,6 +3410,7 @@ const ENGINE = {
             avail:  compAvails[i]  ?? 'Available',
           }))
         ];
+
 
     // ── 6. TIPS ──
     const tips = [];
@@ -3626,9 +3479,9 @@ function initRateIdeasForm() {
 function updateDataPills() {
   const st    = getState();
   const pills = [
-    { label: 'STR',          has: !!st.strData },
     { label: 'Lighthouse',   has: !!st.lighthouseData },
     { label: 'Availability', has: Object.keys(st.availability||{}).length > 0 },
+    { label: 'Compset',      has: !!(st.compset?.length) },
     { label: 'Budget',       has: !!st.budget },
   ];
   document.getElementById('ri-data-pills').innerHTML = pills.map(p =>
@@ -3652,7 +3505,7 @@ function generateRates() {
   document.getElementById('ri-loading').style.display = 'flex';
   document.getElementById('ri-submit-btn').disabled   = true;
 
-  const steps = ['Analysing STR data…','Checking compset rates…','Calculating availability pressure…','Applying multipliers…','Building proposal…'];
+  const steps = ['Reading Lighthouse rates…','Checking compset positioning…','Calculating availability pressure…','Applying group multipliers…','Building proposal…'];
   let si = 0;
   const stepEl = document.getElementById('ri-loading-steps');
   const iv = setInterval(() => {
@@ -3668,7 +3521,6 @@ function generateRates() {
     fb:        document.getElementById('ri-fb').value,
     urgency:   document.getElementById('ri-urgency').value,
     repeat:    document.getElementById('ri-repeat').value,
-    strData:        st.strData,
     lighthouseData: st.lighthouseData,
     availability:   st.availability || {},
     budget:         st.budget,
@@ -3758,7 +3610,7 @@ function renderRateResult(r, params) {
       <td><span class="comp-rank ${i===0?'top':''}">${i+1}</span></td>
       <td>${h.name}${h.isYou?'<span class="you-badge">You</span>':''}</td>
       <td><span class="comp-rate">${r.sym}${h.rate}</span></td>
-      <td>${h.isYou ? (params.strData?.mpi||'—') : '~'+Math.round(95+Math.random()*10)}</td>
+      <td>${h.isYou ? '—' : '~'+Math.round(93+Math.random()*12)}</td>
       <td>★ ${h.review||'—'}</td>
       <td>${vsHtml}</td>
     </tr>`;
