@@ -2356,6 +2356,20 @@
           </div>
         </div>
 
+        <!-- ── ADR Warning ── -->
+        <div id="ri-adr-warn" style="display:none;align-items:flex-start;gap:0.6rem;
+          background:rgba(170,10,59,0.08);border:1px solid rgba(170,10,59,0.25);
+          border-radius:var(--radius-sm);padding:0.75rem 1rem;font-size:0.78rem;
+          color:var(--text-2);margin-bottom:1rem;line-height:1.5">
+          <svg viewBox="0 0 14 14" fill="none" width="14" height="14" style="flex-shrink:0;margin-top:1px;color:var(--amber)">
+            <path d="M7 1L13 12H1L7 1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+            <path d="M7 5v3M7 9.5v.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          <span><strong style="color:var(--amber)">Set your Target ADR in Settings → Budget</strong> — 
+          without it, rates are anchored to a generic fallback (160). Enter your property's actual average 
+          daily rate in your currency for accurate proposals.</span>
+        </div>
+
         <!-- ── Spinner ── -->
         <div class="ri-loading" id="ri-loading" style="display:none">
           <div class="ri-spinner"></div>
@@ -2812,9 +2826,10 @@ function handleUpload(type, e) {
     if (!st.reports) st.reports = {};
     st.reports[type] = { name: file.name, date: new Date().toISOString() };
 
-    // Build compset from Settings hotels — rates derived from real OTA average
+    // Build compset from Settings hotels — anchored to budget ADR in Settings
+    saveState(st); // save first so buildMockCompset can read budget.adr
     st.lighthouseData = buildMockCompset();
-    saveState(st);
+    saveState(st); // save again with the built compset
     renderCompsetTable(st.lighthouseData);
     refreshDashboard();
     toast('Lighthouse report loaded');
@@ -2843,7 +2858,9 @@ function buildMockCompset() {
 
   // Anchor rate: use budget ADR if set, otherwise 160 as a reasonable 4-star default
   // User should configure this in Settings → Budget → Target ADR
-  const anchorRate = st.budget?.adr || 160;
+  // Always re-read fresh state so we get the latest saved ADR
+  const freshSt    = getState();
+  const anchorRate = freshSt.budget?.adr || st.budget?.adr || 160;
 
   const compNames = (st.compset && st.compset.length)
     ? st.compset
@@ -3216,17 +3233,19 @@ function saveSettings() {
     ota:      document.getElementById('s-ota').value,
   };
 
-  const revenue = parseFloat(document.getElementById('s-budget-rev').value);
-  if (revenue > 0) {
+  const revenue = parseFloat(document.getElementById('s-budget-rev').value) || 0;
+  const adr     = parseFloat(document.getElementById('s-budget-adr').value)  || 0;
+  // Always save budget object if any field is filled — adr is critical for rate engine
+  if (revenue > 0 || adr > 0) {
     st.budget = {
       year:    parseInt(document.getElementById('s-budget-year').value) || new Date().getFullYear(),
       revenue,
       roomRev: parseFloat(document.getElementById('s-budget-room-rev').value) || 0,
       revpar:  parseFloat(document.getElementById('s-budget-revpar').value)   || 0,
-      adr:     parseFloat(document.getElementById('s-budget-adr').value)      || 0,
+      adr,
       occ:     parseFloat(document.getElementById('s-budget-occ').value)      || 0,
     };
-    renderBudgetSummary(st.budget);
+    if (revenue > 0) renderBudgetSummary(st.budget);
   }
 
   // Compset
@@ -3237,11 +3256,6 @@ function saveSettings() {
   if (lines.length) {
     st.compset = lines;
     renderCompsetChips(lines);
-    // Rebuild Lighthouse compset so Reports table reflects new hotel names
-    if (st.lighthouseData) {
-      st.lighthouseData = buildMockCompset();
-      renderCompsetTable(st.lighthouseData);
-    }
   }
 
   // Sync total-rooms with availability calendar
@@ -3250,6 +3264,12 @@ function saveSettings() {
 
   updateCurrencyPrefix(currency);
   saveState(st);
+  // Rebuild compset AFTER saveState so buildMockCompset reads the fresh adr
+  if (st.lighthouseData) {
+    st.lighthouseData = buildMockCompset();
+    renderCompsetTable(st.lighthouseData);
+    saveState(getState()); // persist rebuilt compset
+  }
   refreshDashboard();
   toast('Settings saved ✓');
 }
@@ -3323,9 +3343,10 @@ const ENGINE = {
 
     // ── 1. BASE — OTA compset average (not pre-discounted) ──
     // Use comp OTA average as-is. Group/volume/loyalty multipliers below apply the discount.
-    // Fallback: use budget ADR from state if no Lighthouse data
-    const st_engine = (()=>{ try { return JSON.parse(localStorage.getItem('revly_state')||'{}'); } catch{return {};} })();
-    let compOtaAvg = st_engine.budget?.adr || 160; // fallback
+    // Priority: Lighthouse comp avg → budget ADR → 0 (engine will show warning)
+    const st_engine = (()=>{ try { return JSON.parse(localStorage.getItem('revly_state')||'{}}'); } catch{return {};} })();
+    const budgetAdr = st_engine.budget?.adr || 0;
+    let compOtaAvg = budgetAdr || 160; // last fallback — user should set ADR in Settings
     if (lighthouseData?.length) {
       const comp   = lighthouseData.filter(h => !h.isYou);
       compOtaAvg   = comp.reduce((s, h) => s + h.rate, 0) / (comp.length || 1);
@@ -3482,12 +3503,16 @@ function initRateIdeasForm() {
 
 function updateDataPills() {
   const st    = getState();
+  const hasAdr = !!(st.budget?.adr > 0);
   const pills = [
     { label: 'Lighthouse',   has: !!st.lighthouseData },
     { label: 'Availability', has: Object.keys(st.availability||{}).length > 0 },
     { label: 'Compset',      has: !!(st.compset?.length) },
-    { label: 'Budget',       has: !!st.budget },
+    { label: 'Target ADR',   has: hasAdr, warn: !hasAdr },
   ];
+  // Show ADR warning banner
+  const adrWarn = document.getElementById('ri-adr-warn');
+  if (adrWarn) adrWarn.style.display = hasAdr ? 'none' : 'flex';
   document.getElementById('ri-data-pills').innerHTML = pills.map(p =>
     `<span class="ri-data-pill ${p.has ? 'has' : 'miss'}">
       ${p.has ? '✓' : '○'} ${p.label}
