@@ -6,257 +6,210 @@
   <title>Revly — Group Pricing Intelligence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ─── TOKENS ─────────────────────────────────────── */
     :root {
-      --bg:        #0f0a0c;
-      --bg2:       #160d10;
-      --bg3:       #1e1116;
-      --border:    rgba(201,168,76,0.1);
-      --border-hi: rgba(201,168,76,0.22);
-      --amber:     #C9A84C;
-      --amber-dim: rgba(201,168,76,0.16);
-      --amber-glow:rgba(201,168,76,0.06);
-      --crimson:   #AA0A3B;
-      --text:      #f2ede6;
-      --text-2:    #9c8a80;
-      --text-3:    #5a4840;
-      --green:     #4ab87a;
-      --red:       #e05a6a;
-      --font-display: 'Syne', sans-serif;
-      --font-body:    'Inter', sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
+      --gold:     #C9A44A;
+      --gold-dk:  #956E1A;
+      --gold-dim: rgba(201,164,74,0.13);
+      --text:     #1c1814;
+      --text-2:   #6b5f4e;
+      --text-3:   #a89070;
+      --bg:       #faf8f5;
+      --bg2:      #ffffff;
+      --bg3:      #f3f0eb;
+      --border:   rgba(180,155,90,0.22);
+      --bhi:      rgba(180,155,90,0.42);
+      --panel:    #1c1a16;
+      --red:      #b83232;
+      --green:    #2e7d4f;
+      --fd: 'Syne', sans-serif;
+      --fb: 'Inter', sans-serif;
+      --fm: 'JetBrains Mono', monospace;
     }
 
-    /* ─── RESET ──────────────────────────────────────── */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; overflow: hidden; }
 
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text);
-    }
+    body { font-family: var(--fb); background: var(--bg); color: var(--text); }
 
-    /* ─── LAYOUT ──────────────────────────────────────── */
-    .auth-shell {
+    /* ── SHELL ── */
+    .shell {
       display: grid;
-      grid-template-columns: 1fr 480px;
+      grid-template-columns: 1fr 460px;
       height: 100vh;
     }
 
-    /* ─── LEFT PANEL ──────────────────────────────────── */
-    .left-panel {
+    /* ── LEFT (dark) ── */
+    .lp {
       position: relative;
       overflow: hidden;
-      background: var(--bg2);
-      border-right: 1px solid var(--border);
+      background: var(--panel);
     }
 
-    /* Animated grid canvas */
-    #grid-canvas {
+    canvas {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
     }
 
-    .left-content {
+    .lp-inner {
       position: relative;
       z-index: 2;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 3rem;
+      padding: 2.75rem 3rem;
+      color: #f5f0e8;
     }
 
-    .wordmark {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
+    .wm { display: flex; align-items: center; gap: 0.65rem; }
 
-    .wordmark-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--crimson);
+    .wm-ico {
+      width: 28px; height: 28px;
+      background: var(--gold);
       border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .wordmark-icon svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    .wordmark-text {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--text);
-    }
-
-    /* Floating metric cards */
-    .metrics-showcase {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .showcase-label {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      margin-bottom: 0.5rem;
-    }
-
-    .metric-card {
-      background: rgba(22,13,16,0.88);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.1rem 1.4rem;
-      backdrop-filter: blur(20px);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      animation: floatIn 0.6s ease forwards;
-      opacity: 0;
-      transform: translateX(-16px);
-      max-width: 340px;
-    }
-
-    .metric-card:nth-child(2) { animation-delay: 0.1s; }
-    .metric-card:nth-child(3) { animation-delay: 0.2s; }
-    .metric-card:nth-child(4) { animation-delay: 0.3s; }
-
-    .metric-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
-    .metric-dot.amber { background: var(--crimson); box-shadow: 0 0 6px var(--crimson); }
-    .metric-dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
-    .metric-dot.red   { background: var(--red);   box-shadow: 0 0 6px var(--red); }
+    .wm-ico svg { width: 15px; height: 15px; display: block; }
 
-    .metric-body { flex: 1; }
-
-    .metric-label {
-      font-size: 0.7rem;
-      color: var(--text-2);
-      letter-spacing: 0.04em;
-      margin-bottom: 0.15rem;
-    }
-
-    .metric-value {
-      font-family: var(--font-mono);
+    .wm-name {
+      font-family: var(--fd);
       font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--text);
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
 
-    .metric-delta {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
+    .metrics { display: flex; flex-direction: column; gap: 0.85rem; }
+
+    .metrics-eyebrow {
+      font-family: var(--fm);
+      font-size: 0.59rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.32);
+      margin-bottom: 0.2rem;
     }
 
-    .metric-delta.up   { color: var(--green); }
-    .metric-delta.down { color: var(--red); }
-
-    .left-footer {
-      font-size: 0.72rem;
-      color: var(--text-3);
-      line-height: 1.6;
+    .mc {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,164,74,0.14);
+      border-radius: 8px;
+      padding: 0.95rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      max-width: 340px;
+      animation: fup 0.5s ease both;
     }
 
-    .left-footer strong {
-      color: var(--text-2);
-      font-weight: 500;
-    }
+    .mc:nth-child(2){animation-delay:.08s}
+    .mc:nth-child(3){animation-delay:.16s}
+    .mc:nth-child(4){animation-delay:.24s}
+    .mc:nth-child(5){animation-delay:.32s}
 
-    /* ─── RIGHT PANEL ─────────────────────────────────── */
-    .right-panel {
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot.g { background: var(--gold); box-shadow: 0 0 7px rgba(201,164,74,0.65); }
+    .dot.gr{ background: #4abe82;     box-shadow: 0 0 7px rgba(74,190,130,0.55); }
+
+    .mc-b { flex: 1; min-width: 0; }
+    .mc-lbl { font-size: 0.67rem; color: rgba(245,240,232,0.42); margin-bottom: 0.1rem; }
+    .mc-val { font-family: var(--fm); font-size: 0.97rem; }
+
+    .mc-d { font-family: var(--fm); font-size: 0.67rem; flex-shrink: 0; }
+    .mc-d.up   { color: #4abe82; }
+    .mc-d.down { color: #e07575; }
+
+    .lp-foot {
+      font-size: 0.73rem;
+      color: rgba(245,240,232,0.35);
+      line-height: 1.65;
+    }
+    .lp-foot b { color: rgba(245,240,232,0.65); font-weight: 500; }
+
+    /* ── RIGHT (light) ── */
+    .rp {
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 3rem 3.5rem;
-      background: var(--bg);
+      padding: 3rem 3.25rem;
       overflow-y: auto;
+      animation: fup 0.4s ease 0.05s both;
     }
 
-    .form-header {
-      margin-bottom: 2.5rem;
-    }
-
-    .form-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
+    .eyebrow {
+      font-family: var(--fm);
+      font-size: 0.59rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 0.6rem;
+      color: var(--gold-dk);
+      margin-bottom: 0.45rem;
     }
 
-    .form-title {
-      font-family: var(--font-display);
-      font-size: 1.9rem;
+    .title {
+      font-family: var(--fd);
+      font-size: 1.75rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      color: var(--text);
       line-height: 1.15;
+      margin-bottom: 0.35rem;
     }
 
-    .form-sub {
-      margin-top: 0.5rem;
-      font-size: 0.83rem;
+    .subtitle {
+      font-size: 0.82rem;
       color: var(--text-2);
-      line-height: 1.5;
+      margin-bottom: 2rem;
     }
 
-    /* Tabs */
-    .tab-row {
+    /* tabs */
+    .tabs {
       display: flex;
-      gap: 0;
-      margin-bottom: 2rem;
-      background: var(--bg2);
+      background: var(--bg3);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 3px;
+      margin-bottom: 1.75rem;
+      gap: 0;
     }
 
     .tab {
       flex: 1;
-      padding: 0.55rem 1rem;
+      padding: 0.5rem;
       text-align: center;
       font-size: 0.8rem;
       font-weight: 500;
       color: var(--text-2);
-      cursor: pointer;
       border-radius: 6px;
-      transition: all 0.18s ease;
-      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
     }
 
     .tab.active {
-      background: rgba(170,10,59,0.12);
+      background: var(--bg2);
       color: var(--text);
-      border: 1px solid rgba(170,10,59,0.3);
+      border: 1px solid var(--bhi);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
     }
 
-    /* Fields */
-    .field {
-      margin-bottom: 1.1rem;
-    }
+    /* panels */
+    .pnl { display: none; }
+    .pnl.active { display: block; }
 
-    .field-row {
+    /* fields */
+    .f { margin-bottom: 1rem; }
+
+    .fr {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.75rem;
@@ -264,128 +217,87 @@
 
     label {
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.67rem;
       font-weight: 500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: var(--text-2);
-      margin-bottom: 0.45rem;
+      color: var(--text-3);
+      margin-bottom: 0.38rem;
     }
 
     input, select {
       width: 100%;
-      background: var(--bg2);
+      background: var(--bg3);
       border: 1px solid var(--border);
       border-radius: 7px;
-      padding: 0.72rem 0.9rem;
+      padding: 0.67rem 0.88rem;
       color: var(--text);
-      font-family: var(--font-body);
-      font-size: 0.88rem;
+      font-family: var(--fb);
+      font-size: 0.875rem;
       outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
       -webkit-appearance: none;
     }
 
     input::placeholder { color: var(--text-3); }
-
-    input:focus, select:focus {
-      border-color: var(--crimson);
-      box-shadow: 0 0 0 3px rgba(170,10,59,0.12);
-    }
-
     select option { background: var(--bg2); }
 
-    /* Error */
-    .field-error {
-      font-size: 0.7rem;
+    input:focus, select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,164,74,0.15);
+      background: var(--bg2);
+    }
+
+    .ferr {
+      font-size: 0.69rem;
       color: var(--red);
       margin-top: 0.3rem;
       display: none;
     }
 
-    /* Submit button */
-    .btn-submit {
-      width: 100%;
-      margin-top: 0.75rem;
-      padding: 0.85rem 1.5rem;
-      background: var(--crimson);
-      color: #f2ede6;
-      font-family: var(--font-display);
-      font-size: 0.88rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-submit::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .btn-submit:hover {
-      opacity: 0.92;
-      box-shadow: 0 4px 24px rgba(170,10,59,0.4);
-    }
-
-    .btn-submit:active {
-      transform: scale(0.98);
-    }
-
-    .btn-submit:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Divider */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin: 1.25rem 0;
-      color: var(--text-3);
-      font-size: 0.7rem;
-    }
-
-    .divider::before, .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* Form panels */
-    .form-panel { display: none; }
-    .form-panel.active { display: block; }
-
-    /* Password strength */
-    .pw-strength {
-      display: flex;
-      gap: 3px;
-      margin-top: 0.4rem;
-    }
-
-    .pw-bar {
-      flex: 1;
-      height: 3px;
+    /* pw strength */
+    .pw-wrap { display: flex; gap: 3px; margin-top: 0.4rem; }
+    .pw-b {
+      flex: 1; height: 3px;
       background: var(--border);
       border-radius: 99px;
       transition: background 0.2s;
     }
+    .pw-b.weak   { background: var(--red); }
+    .pw-b.medium { background: var(--gold); }
+    .pw-b.strong { background: var(--green); }
 
-    .pw-bar.weak   { background: var(--red); }
-    .pw-bar.medium { background: var(--amber); }
-    .pw-bar.strong { background: var(--green); }
+    /* submit */
+    .btn {
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.82rem;
+      background: var(--gold);
+      color: #fff;
+      font-family: var(--fd);
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: opacity 0.15s, box-shadow 0.15s, transform 0.1s;
+    }
 
-    /* Terms */
-    .terms-line {
+    .btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .btn:hover   { opacity: 0.91; box-shadow: 0 4px 18px rgba(201,164,74,0.38); }
+    .btn:active  { transform: scale(0.99); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .terms {
       margin-top: 1rem;
       font-size: 0.7rem;
       color: var(--text-3);
@@ -393,176 +305,153 @@
       line-height: 1.5;
     }
 
-    .terms-line a {
-      color: var(--amber);
-      text-decoration: none;
-    }
+    .terms a { color: var(--gold-dk); text-decoration: none; }
+    .terms a:hover { text-decoration: underline; }
 
-    /* ─── TOAST ───────────────────────────────────────── */
+    /* toast */
     .toast {
       position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(12px);
-      background: var(--bg3);
-      border: 1px solid var(--border-hi);
-      border-radius: 8px;
-      padding: 0.75rem 1.5rem;
-      font-size: 0.82rem;
-      color: var(--text);
+      bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--panel);
+      border: 1px solid rgba(201,164,74,0.28);
+      color: #f5f0e8;
+      border-radius: 7px;
+      padding: 0.62rem 1.4rem;
+      font-size: 0.8rem;
       opacity: 0;
       transition: opacity 0.2s, transform 0.2s;
       pointer-events: none;
-      z-index: 1000;
+      z-index: 999;
       white-space: nowrap;
     }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--bhi); border-radius: 99px; }
 
-    /* ─── ANIMATIONS ──────────────────────────────────── */
-    @keyframes floatIn {
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
+    @keyframes fup {
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    .right-panel {
-      animation: fadeUp 0.5s ease 0.1s both;
-    }
-
-    /* ─── SCROLLBAR ───────────────────────────────────── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 99px; }
   </style>
 </head>
 <body>
 
-<div class="auth-shell">
+<div class="shell">
 
-  <!-- ── LEFT PANEL ── -->
-  <div class="left-panel">
-    <canvas id="grid-canvas"></canvas>
+  <!-- LEFT -->
+  <div class="lp">
+    <canvas id="cv"></canvas>
+    <div class="lp-inner">
 
-    <div class="left-content">
-      <div class="wordmark">
-        <div class="wordmark-icon">
-          <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 14L7 9L10 12L14 6" stroke="#f2ede6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="14" cy="6" r="1.5" fill="#f2ede6"/>
+      <div class="wm">
+        <div class="wm-ico">
+          <svg viewBox="0 0 15 15" fill="none">
+            <path d="M2 11L6 7L8.5 9.5L12.5 4" stroke="#1c1814" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12.5" cy="4" r="1.4" fill="#1c1814"/>
           </svg>
         </div>
-        <span class="wordmark-text">Revly</span>
+        <span class="wm-name">Revly</span>
       </div>
 
-      <div class="metrics-showcase">
-        <div class="showcase-label">Live market snapshot</div>
-
-        <div class="metric-card">
-          <div class="metric-dot amber"></div>
-          <div class="metric-body">
-            <div class="metric-label">Recommended Group Rate</div>
-            <div class="metric-value">€ 148 <span style="font-size:0.72rem;color:var(--text-2)">/ room / night</span></div>
+      <div class="metrics">
+        <div class="metrics-eyebrow">Live market snapshot</div>
+        <div class="mc">
+          <div class="dot g"></div>
+          <div class="mc-b">
+            <div class="mc-lbl">Recommended Group Rate</div>
+            <div class="mc-val">zł 620 <span style="font-size:.7rem;opacity:.4">/ room / night</span></div>
           </div>
-          <div class="metric-delta up">+4.7%</div>
+          <div class="mc-d up">+4.7%</div>
         </div>
-
-        <div class="metric-card">
-          <div class="metric-dot green"></div>
-          <div class="metric-body">
-            <div class="metric-label">MPI vs Compset</div>
-            <div class="metric-value">103.6</div>
+        <div class="mc">
+          <div class="dot gr"></div>
+          <div class="mc-b">
+            <div class="mc-lbl">Compset Avg OTA</div>
+            <div class="mc-val">zł 648</div>
           </div>
-          <div class="metric-delta up">▲ above index</div>
+          <div class="mc-d up">▲ 5 hotels</div>
         </div>
-
-        <div class="metric-card">
-          <div class="metric-dot amber"></div>
-          <div class="metric-body">
-            <div class="metric-label">Occupancy — Requested Dates</div>
-            <div class="metric-value">74 <span style="font-size:0.72rem;color:var(--text-2)">rooms blocked</span></div>
+        <div class="mc">
+          <div class="dot g"></div>
+          <div class="mc-b">
+            <div class="mc-lbl">Availability Pressure</div>
+            <div class="mc-val">74 rooms blocked</div>
           </div>
-          <div class="metric-delta down">high pressure</div>
+          <div class="mc-d down">high</div>
         </div>
-
-        <div class="metric-card">
-          <div class="metric-dot green"></div>
-          <div class="metric-body">
-            <div class="metric-label">Est. Group Revenue</div>
-            <div class="metric-value">€ 29,600</div>
+        <div class="mc">
+          <div class="dot gr"></div>
+          <div class="mc-b">
+            <div class="mc-lbl">Est. Group Revenue</div>
+            <div class="mc-val">zł 124,000</div>
           </div>
-          <div class="metric-delta up">+3.1% vs budget</div>
+          <div class="mc-d up">+3.1% vs budget</div>
         </div>
       </div>
 
-      <div class="left-footer">
-        <strong>Group pricing intelligence</strong> for hotel revenue managers.<br>
-        Upload STR & Lighthouse reports. Get smart rate proposals in seconds.
+      <div class="lp-foot">
+        <b>Group pricing intelligence</b> for hotel revenue managers.<br>
+        Upload Lighthouse reports. Get smart rate proposals in seconds.
       </div>
+
     </div>
   </div>
 
-  <!-- ── RIGHT PANEL ── -->
-  <div class="right-panel">
-    <div class="form-header">
-      <div class="form-eyebrow">Revenue Intelligence Platform</div>
-      <div class="form-title">Welcome to<br>Revly</div>
-      <div class="form-sub">Sign in or create your account to start pricing groups smarter.</div>
-    </div>
+  <!-- RIGHT -->
+  <div class="rp">
+    <div class="eyebrow">Revenue Intelligence Platform</div>
+    <div class="title">Welcome to<br>Revly</div>
+    <div class="subtitle">Sign in or create your account to start pricing groups smarter.</div>
 
-    <div class="tab-row">
+    <div class="tabs">
       <div class="tab active" id="tab-login" onclick="switchTab('login')">Sign in</div>
-      <div class="tab" id="tab-register" onclick="switchTab('register')">Create account</div>
+      <div class="tab"        id="tab-reg"   onclick="switchTab('reg')">Create account</div>
     </div>
 
-    <!-- LOGIN FORM -->
-    <div class="form-panel active" id="panel-login">
-      <div class="field">
+    <!-- LOGIN -->
+    <div class="pnl active" id="pnl-login">
+      <div class="f">
         <label>Email address</label>
-        <input type="email" id="login-email" placeholder="you@property.com" autocomplete="email">
-        <div class="field-error" id="login-email-err">Please enter a valid email.</div>
+        <input type="email" id="l-email" placeholder="you@property.com" autocomplete="email">
+        <div class="ferr" id="l-email-err"></div>
       </div>
-      <div class="field">
+      <div class="f">
         <label>Password</label>
-        <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
-        <div class="field-error" id="login-pass-err">Password is required.</div>
+        <input type="password" id="l-pass" placeholder="••••••••" autocomplete="current-password">
+        <div class="ferr" id="l-pass-err"></div>
       </div>
-      <button class="btn-submit" id="btn-login" onclick="doLogin()">Sign in to Revly</button>
-      <div class="terms-line">
-        Don't have an account? <a href="#" onclick="switchTab('register'); return false;">Create one free →</a>
+      <button class="btn" id="btn-login" onclick="doLogin()">Sign in to Revly</button>
+      <div class="terms">
+        No account? <a href="#" onclick="switchTab('reg');return false">Create one free →</a>
       </div>
     </div>
 
-    <!-- REGISTER FORM -->
-    <div class="form-panel" id="panel-register">
-      <div class="field-row">
-        <div class="field">
+    <!-- REGISTER -->
+    <div class="pnl" id="pnl-reg">
+      <div class="fr">
+        <div class="f">
           <label>First name</label>
-          <input type="text" id="reg-fname" placeholder="Anna" autocomplete="given-name">
+          <input type="text" id="r-fname" placeholder="Anna" autocomplete="given-name">
         </div>
-        <div class="field">
+        <div class="f">
           <label>Last name</label>
-          <input type="text" id="reg-lname" placeholder="Kowalski" autocomplete="family-name">
+          <input type="text" id="r-lname" placeholder="Kowalski" autocomplete="family-name">
         </div>
       </div>
-      <div class="field">
+      <div class="f">
         <label>Hotel name</label>
-        <input type="text" id="reg-hotel" placeholder="Hotel Metropol Warsaw" autocomplete="organization">
+        <input type="text" id="r-hotel" placeholder="Mövenpick Grand Hotel Wrocław">
       </div>
-      <div class="field-row">
-        <div class="field">
+      <div class="fr">
+        <div class="f">
           <label>City</label>
-          <input type="text" id="reg-city" placeholder="Warsaw">
+          <input type="text" id="r-city" placeholder="Wrocław">
         </div>
-        <div class="field">
+        <div class="f">
           <label>Property size</label>
-          <select id="reg-size">
+          <select id="r-size">
             <option value="">Select…</option>
             <option value="small">Under 50 rooms</option>
             <option value="mid">50–150 rooms</option>
@@ -571,236 +460,141 @@
           </select>
         </div>
       </div>
-      <div class="field">
+      <div class="f">
         <label>Work email</label>
-        <input type="email" id="reg-email" placeholder="anna@metropol.com" autocomplete="email">
-        <div class="field-error" id="reg-email-err">Please enter a valid email.</div>
+        <input type="email" id="r-email" placeholder="anna@hotel.com" autocomplete="email">
+        <div class="ferr" id="r-email-err"></div>
       </div>
-      <div class="field">
+      <div class="f">
         <label>Password</label>
-        <input type="password" id="reg-pass" placeholder="Min. 8 characters" autocomplete="new-password" oninput="checkPasswordStrength(this.value)">
-        <div class="pw-strength">
-          <div class="pw-bar" id="pw-bar-1"></div>
-          <div class="pw-bar" id="pw-bar-2"></div>
-          <div class="pw-bar" id="pw-bar-3"></div>
-          <div class="pw-bar" id="pw-bar-4"></div>
+        <input type="password" id="r-pass" placeholder="Min. 8 characters" autocomplete="new-password" oninput="pwStr(this.value)">
+        <div class="pw-wrap">
+          <div class="pw-b" id="pb1"></div><div class="pw-b" id="pb2"></div>
+          <div class="pw-b" id="pb3"></div><div class="pw-b" id="pb4"></div>
         </div>
-        <div class="field-error" id="reg-pass-err">Password must be at least 8 characters.</div>
+        <div class="ferr" id="r-pass-err"></div>
       </div>
-
-      <button class="btn-submit" onclick="doRegister()">Create account →</button>
-      <div class="terms-line">
-        By creating an account you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+      <button class="btn" onclick="doRegister()">Create account →</button>
+      <div class="terms">
+        By creating an account you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CANVAS GRID ─────────────────────────────────────────────
-(function() {
-  const canvas = document.getElementById('grid-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, cols, rows, cells = [], frame = 0;
+// ── CANVAS ───────────────────────────────────────────────────
+(function(){
+  const cv  = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  let W, H, pts = [];
+  const SZ = 46;
 
-  const AMBER = 'rgba(201,168,76,';
-  const WHITE = 'rgba(255,255,255,';
-  const CELL = 48;
-
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-    cols = Math.ceil(W / CELL) + 1;
-    rows = Math.ceil(H / CELL) + 1;
-    cells = [];
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        cells.push({
-          r, c,
-          pulse: Math.random() * Math.PI * 2,
-          speed: 0.004 + Math.random() * 0.008,
-          bright: Math.random() > 0.97
-        });
-      }
-    }
+  function resize(){
+    W = cv.width  = cv.offsetWidth;
+    H = cv.height = cv.offsetHeight;
+    pts = [];
+    for(let y=0; y<=H; y+=SZ)
+      for(let x=0; x<=W; x+=SZ)
+        pts.push({ x, y, ph: Math.random()*Math.PI*2, sp: 0.003+Math.random()*0.006, gold: Math.random()>0.96 });
   }
 
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-
-    // Grid lines
-    ctx.strokeStyle = 'rgba(255,255,255,0.035)';
-    ctx.lineWidth = 1;
-
-    for (let c = 0; c <= cols; c++) {
-      ctx.beginPath();
-      ctx.moveTo(c * CELL, 0);
-      ctx.lineTo(c * CELL, H);
-      ctx.stroke();
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(201,164,74,0.065)'; ctx.lineWidth=1;
+    for(let x=0;x<=W;x+=SZ){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+    for(let y=0;y<=H;y+=SZ){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+    for(const p of pts){
+      p.ph += p.sp;
+      const a = (Math.sin(p.ph)+1)/2;
+      ctx.fillStyle = p.gold
+        ? `rgba(201,164,74,${(a*0.7).toFixed(2)})`
+        : `rgba(245,240,232,${(a*0.08).toFixed(2)})`;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.gold?2.2:1.5,0,Math.PI*2); ctx.fill();
     }
-    for (let r = 0; r <= rows; r++) {
-      ctx.beginPath();
-      ctx.moveTo(0, r * CELL);
-      ctx.lineTo(W, r * CELL);
-      ctx.stroke();
-    }
-
-    // Animated dots at intersections
-    for (const cell of cells) {
-      cell.pulse += cell.speed;
-      const alpha = (Math.sin(cell.pulse) + 1) / 2;
-      const x = cell.c * CELL;
-      const y = cell.r * CELL;
-
-      if (cell.bright) {
-        ctx.fillStyle = AMBER + (alpha * 0.7) + ')';
-        ctx.beginPath();
-        ctx.arc(x, y, 2, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        ctx.fillStyle = WHITE + (alpha * 0.12) + ')';
-        ctx.beginPath();
-        ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    // Subtle radial vignette
-    const grad = ctx.createRadialGradient(W*0.4, H*0.5, 0, W*0.4, H*0.5, W*0.7);
-    grad.addColorStop(0, 'rgba(170,10,59,0.06)');
-    grad.addColorStop(1, 'rgba(15,10,12,0.65)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, W, H);
-
-    frame++;
+    const g=ctx.createRadialGradient(W*.35,H*.5,0,W*.35,H*.5,W*.65);
+    g.addColorStop(0,'rgba(201,164,74,0.05)'); g.addColorStop(1,'rgba(28,26,22,0.55)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
     requestAnimationFrame(draw);
   }
-
-  window.addEventListener('resize', resize);
-  resize();
-  draw();
+  window.addEventListener('resize',resize); resize(); draw();
 })();
 
-// ── TAB SWITCH ───────────────────────────────────────────────
-function switchTab(tab) {
-  ['login','register'].forEach(t => {
-    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
-    document.getElementById('panel-' + t).classList.toggle('active', t === tab);
+// ── TABS ─────────────────────────────────────────────────────
+function switchTab(t){
+  ['login','reg'].forEach(id=>{
+    document.getElementById('tab-'+id).classList.toggle('active', id===t);
+    document.getElementById('pnl-'+id).classList.toggle('active', id===t);
   });
 }
 
-// ── PASSWORD STRENGTH ────────────────────────────────────────
-function checkPasswordStrength(val) {
-  const bars = [
-    document.getElementById('pw-bar-1'),
-    document.getElementById('pw-bar-2'),
-    document.getElementById('pw-bar-3'),
-    document.getElementById('pw-bar-4'),
-  ];
-  bars.forEach(b => b.className = 'pw-bar');
-
-  if (!val) return;
-  let score = 0;
-  if (val.length >= 8) score++;
-  if (/[A-Z]/.test(val)) score++;
-  if (/[0-9]/.test(val)) score++;
-  if (/[^A-Za-z0-9]/.test(val)) score++;
-
-  const cls = score <= 1 ? 'weak' : score <= 2 ? 'medium' : 'strong';
-  for (let i = 0; i < score; i++) bars[i].classList.add(cls);
+// ── PW STRENGTH ──────────────────────────────────────────────
+function pwStr(v){
+  const bs=[document.getElementById('pb1'),document.getElementById('pb2'),
+            document.getElementById('pb3'),document.getElementById('pb4')];
+  bs.forEach(b=>b.className='pw-b');
+  if(!v) return;
+  let s=0;
+  if(v.length>=8)s++; if(/[A-Z]/.test(v))s++; if(/[0-9]/.test(v))s++; if(/[^A-Za-z0-9]/.test(v))s++;
+  const c=s<=1?'weak':s<=2?'medium':'strong';
+  for(let i=0;i<s;i++) bs[i].classList.add(c);
 }
 
 // ── TOAST ────────────────────────────────────────────────────
-function toast(msg, duration = 2800) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), duration);
+function toast(m){ const e=document.getElementById('toast'); e.textContent=m; e.classList.add('show'); setTimeout(()=>e.classList.remove('show'),2800); }
+
+// ── ERRORS ───────────────────────────────────────────────────
+function clearErr(){ document.querySelectorAll('.ferr').forEach(e=>e.style.display='none'); }
+function showErr(id,m){ const e=document.getElementById(id); if(e){e.textContent=m;e.style.display='block';} }
+
+// ── LOGIN ────────────────────────────────────────────────────
+function doLogin(){
+  clearErr();
+  const email=document.getElementById('l-email').value.trim();
+  const pass=document.getElementById('l-pass').value;
+  if(!email||!/\S+@\S+\.\S+/.test(email)){ showErr('l-email-err','Please enter a valid email.'); return; }
+  if(!pass){ showErr('l-pass-err','Password is required.'); return; }
+  const stored=localStorage.getItem('revly_user_'+email);
+  if(!stored){ showErr('l-email-err','No account found with this email.'); return; }
+  const user=JSON.parse(stored);
+  if(user.password!==btoa(pass)){ showErr('l-pass-err','Incorrect password.'); return; }
+  const btn=document.getElementById('btn-login');
+  btn.textContent='Signing in…'; btn.disabled=true;
+  localStorage.setItem('revly_session',JSON.stringify({email,name:user.fname+' '+user.lname,hotel:user.hotel,city:user.city,size:user.size}));
+  setTimeout(()=>window.location.href='app.html',600);
 }
 
-// ── VALIDATION ───────────────────────────────────────────────
-function clearErrors() {
-  document.querySelectorAll('.field-error').forEach(e => e.style.display = 'none');
-}
-
-function showError(id, msg) {
-  const el = document.getElementById(id);
-  if (el) { el.textContent = msg; el.style.display = 'block'; }
-}
-
-// ── AUTH ─────────────────────────────────────────────────────
-function doLogin() {
-  clearErrors();
-  const email = document.getElementById('login-email').value.trim();
-  const pass  = document.getElementById('login-pass').value;
-  let ok = true;
-
-  if (!email || !/\S+@\S+\.\S+/.test(email)) { showError('login-email-err', 'Please enter a valid email.'); ok = false; }
-  if (!pass) { showError('login-pass-err', 'Password is required.'); ok = false; }
-  if (!ok) return;
-
-  const stored = localStorage.getItem('revly_user_' + email);
-  if (!stored) { showError('login-email-err', 'No account found with this email.'); return; }
-
-  const user = JSON.parse(stored);
-  if (user.password !== btoa(pass)) { showError('login-pass-err', 'Incorrect password.'); return; }
-
-  const btn = document.getElementById('btn-login');
-  btn.textContent = 'Signing in…';
-  btn.disabled = true;
-
-  localStorage.setItem('revly_session', JSON.stringify({ email, name: user.fname + ' ' + user.lname, hotel: user.hotel, city: user.city, size: user.size }));
-
-  setTimeout(() => {
-    window.location.href = 'app.html';
-  }, 600);
-}
-
-function doRegister() {
-  clearErrors();
-  const fname = document.getElementById('reg-fname').value.trim();
-  const lname = document.getElementById('reg-lname').value.trim();
-  const hotel = document.getElementById('reg-hotel').value.trim();
-  const city  = document.getElementById('reg-city').value.trim();
-  const size  = document.getElementById('reg-size').value;
-  const email = document.getElementById('reg-email').value.trim();
-  const pass  = document.getElementById('reg-pass').value;
-  let ok = true;
-
-  if (!fname || !lname) { toast('Please enter your full name.'); ok = false; }
-  if (!hotel) { toast('Hotel name is required.'); ok = false; }
-  if (!email || !/\S+@\S+\.\S+/.test(email)) { showError('reg-email-err', 'Please enter a valid work email.'); ok = false; }
-  if (!pass || pass.length < 8) { showError('reg-pass-err', 'Password must be at least 8 characters.'); ok = false; }
-  if (!ok) return;
-
-  if (localStorage.getItem('revly_user_' + email)) {
-    showError('reg-email-err', 'An account with this email already exists.');
-    return;
-  }
-
-  localStorage.setItem('revly_user_' + email, JSON.stringify({ fname, lname, hotel, city, size, password: btoa(pass) }));
-  localStorage.setItem('revly_session', JSON.stringify({ email, name: fname + ' ' + lname, hotel, city, size }));
-
+// ── REGISTER ─────────────────────────────────────────────────
+function doRegister(){
+  clearErr();
+  const fname=document.getElementById('r-fname').value.trim();
+  const lname=document.getElementById('r-lname').value.trim();
+  const hotel=document.getElementById('r-hotel').value.trim();
+  const city=document.getElementById('r-city').value.trim();
+  const size=document.getElementById('r-size').value;
+  const email=document.getElementById('r-email').value.trim();
+  const pass=document.getElementById('r-pass').value;
+  if(!fname||!lname){ toast('Please enter your full name.'); return; }
+  if(!hotel){ toast('Hotel name is required.'); return; }
+  if(!email||!/\S+@\S+\.\S+/.test(email)){ showErr('r-email-err','Please enter a valid email.'); return; }
+  if(!pass||pass.length<8){ showErr('r-pass-err','Password must be at least 8 characters.'); return; }
+  if(localStorage.getItem('revly_user_'+email)){ showErr('r-email-err','An account with this email already exists.'); return; }
+  localStorage.setItem('revly_user_'+email,JSON.stringify({fname,lname,hotel,city,size,password:btoa(pass)}));
+  localStorage.setItem('revly_session',JSON.stringify({email,name:fname+' '+lname,hotel,city,size}));
   toast('Account created! Redirecting…');
-  setTimeout(() => { window.location.href = 'app.html'; }, 800);
+  setTimeout(()=>window.location.href='app.html',800);
 }
 
-// Enter key support
-document.addEventListener('keydown', e => {
-  if (e.key !== 'Enter') return;
-  const active = document.querySelector('.form-panel.active').id;
-  if (active === 'panel-login') doLogin();
-  else doRegister();
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter') return;
+  const a=document.querySelector('.pnl.active').id;
+  if(a==='pnl-login') doLogin(); else doRegister();
 });
 
-// Guard: if already logged in, go straight to app
-if (localStorage.getItem('revly_session')) {
-  window.location.href = 'app.html';
-}
+if(localStorage.getItem('revly_session')) window.location.href='app.html';
 </script>
 </body>
 </html>
