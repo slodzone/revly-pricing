@@ -844,6 +844,255 @@
       color: var(--text-3);
       line-height: 1.55;
     }
+
+    /* ════════════════════════════════════════
+       AI COMPSET ANALYSIS
+    ════════════════════════════════════════ */
+    .ai-analysis-card {
+      margin-top: 1.25rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .ai-analysis-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(170,10,59,0.06) 0%, var(--bg2) 60%);
+    }
+
+    .ai-analysis-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .ai-analysis-icon {
+      width: 30px; height: 30px;
+      background: var(--crimson-dim);
+      border: 1px solid rgba(170,10,59,0.25);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--amber);
+      flex-shrink: 0;
+    }
+
+    .ai-analysis-title {
+      font-family: var(--font-d);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .ai-analysis-sub {
+      font-size: 0.67rem;
+      color: var(--text-3);
+      margin-top: 0.1rem;
+    }
+
+    .ai-rerun-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.85rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .ai-rerun-btn:hover { border-color: var(--border-hi); color: var(--text); }
+    .ai-rerun-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Loading bar */
+    .ai-analysis-loading {
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .ai-loading-bar {
+      height: 3px;
+      background: var(--bg3);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .ai-loading-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--crimson), var(--amber), var(--crimson));
+      background-size: 200% 100%;
+      border-radius: 99px;
+      animation: aiBar 1.6s ease infinite;
+      width: 100%;
+    }
+
+    @keyframes aiBar {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .ai-loading-steps-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ai-loading-step-label {
+      font-family: var(--font-m);
+      font-size: 0.68rem;
+      color: var(--text-3);
+    }
+
+    /* Analysis content */
+    #ai-analysis-content {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* Positioning summary */
+    .ai-section {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--crimson);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.1rem;
+      font-size: 0.82rem;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    .ai-section strong { color: var(--text); font-weight: 500; }
+    .ai-section em { color: var(--amber); font-style: normal; }
+
+    /* Signals grid */
+    .ai-signals-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+
+    .ai-signal {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+    }
+
+    .ai-signal-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 0.35rem;
+    }
+
+    .ai-signal-val {
+      font-family: var(--font-m);
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .ai-signal-val.green { color: var(--green); }
+    .ai-signal-val.amber { color: var(--amber); }
+    .ai-signal-val.red   { color: var(--red);   }
+
+    .ai-signal-desc {
+      font-size: 0.68rem;
+      color: var(--text-3);
+      line-height: 1.4;
+    }
+
+    /* Detail paragraphs */
+    .ai-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .ai-detail-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .ai-detail-heading {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .ai-detail-text {
+      font-size: 0.8rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .ai-detail-text strong { color: var(--text); font-weight: 500; }
+
+    /* Recommendations */
+    .ai-recs {
+      background: rgba(170,10,59,0.05);
+      border: 1px solid rgba(170,10,59,0.18);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .ai-recs-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 0.2rem;
+    }
+
+    .ai-rec-item {
+      display: flex;
+      gap: 0.65rem;
+      align-items: flex-start;
+      font-size: 0.79rem;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+
+    .ai-rec-arrow {
+      color: var(--amber);
+      font-family: var(--font-m);
+      font-size: 0.72rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .ai-rec-item strong { color: var(--text); font-weight: 500; }
+
+    .ai-error {
+      padding: 1rem 1.25rem;
+      font-size: 0.78rem;
+      color: var(--red);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
     /* Compset table */
     .comp-table {
       width: 100%;
@@ -2168,6 +2417,57 @@
           </table>
         </div>
 
+        <!-- AI Analysis panel -->
+        <div class="ai-analysis-card" id="ai-analysis-card" style="display:none">
+          <div class="ai-analysis-header">
+            <div class="ai-analysis-left">
+              <div class="ai-analysis-icon">
+                <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+                  <path d="M8 1L9.5 5.5H14L10.5 8.2l1.3 4.3L8 10.2l-3.8 2.3 1.3-4.3L2 5.5h4.5L8 1z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <div class="ai-analysis-title">AI Compset Analysis</div>
+                <div class="ai-analysis-sub">Revenue management analysis · Based on your compset data</div>
+              </div>
+            </div>
+            <button class="ai-rerun-btn" id="ai-rerun-btn" onclick="runAiAnalysis()">
+              <svg viewBox="0 0 14 14" fill="none" width="12" height="12">
+                <path d="M12 7A5 5 0 112 7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M12 3v4h-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Re-analyse
+            </button>
+          </div>
+
+          <!-- Loading state -->
+          <div class="ai-analysis-loading" id="ai-analysis-loading" style="display:none">
+            <div class="ai-loading-bar">
+              <div class="ai-loading-bar-fill"></div>
+            </div>
+            <div class="ai-loading-steps-wrap">
+              <span class="ai-loading-step-label" id="ai-loading-label">Reading compset data…</span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div id="ai-analysis-content" style="display:none">
+
+            <!-- Positioning summary -->
+            <div class="ai-section" id="ai-positioning"></div>
+
+            <!-- Key signals grid -->
+            <div class="ai-signals-grid" id="ai-signals-grid"></div>
+
+            <!-- Detailed analysis paragraphs -->
+            <div class="ai-detail" id="ai-detail"></div>
+
+            <!-- Recommendations -->
+            <div class="ai-recs" id="ai-recs"></div>
+
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -2915,6 +3215,9 @@ function renderCompsetTable(data) {
   }).join('');
 
   document.getElementById('lh-compset-panel').style.display = '';
+
+  // Auto-run AI analysis whenever compset is (re)loaded
+  runAiAnalysis();
 }
 
 function restoreReports() {
@@ -3668,6 +3971,300 @@ function setMetric(id, val, colour) {
 function selectScenario(el) {
   document.querySelectorAll('.ri-scenario').forEach(s => s.classList.remove('selected'));
   el.classList.add('selected');
+}
+
+// ── AI COMPSET ANALYSIS ──────────────────────────────────────
+
+function runAiAnalysis() {
+  const st  = getState();
+  const lh  = st.lighthouseData;
+  if (!lh?.length) return;
+
+  const card    = document.getElementById('ai-analysis-card');
+  const loading = document.getElementById('ai-analysis-loading');
+  const content = document.getElementById('ai-analysis-content');
+  const rerun   = document.getElementById('ai-rerun-btn');
+  const label   = document.getElementById('ai-loading-label');
+
+  card.style.display    = '';
+  loading.style.display = 'flex';
+  content.style.display = 'none';
+  rerun.disabled        = true;
+  card.querySelectorAll('.ai-error').forEach(e => e.remove());
+
+  const steps = [
+    'Reading compset data…',
+    'Analysing rate positioning…',
+    'Identifying gaps & opportunities…',
+    'Writing recommendations…'
+  ];
+  let si = 0;
+  const iv = setInterval(() => {
+    label.textContent = steps[Math.min(si++, steps.length - 1)];
+  }, 650);
+
+  // Small delay so the loading animation is visible
+  setTimeout(() => {
+    clearInterval(iv);
+    const result = analyseCompset(lh, st);
+    renderAiAnalysis(result, result.sym);
+    loading.style.display = 'none';
+    content.style.display = 'flex';
+    rerun.disabled = false;
+  }, 2800);
+}
+
+function analyseCompset(lh, st) {
+  const sym      = { EUR:'€', PLN:'zł', USD:'$', GBP:'£' }[st.property?.currency] || '€';
+  const myHotel  = st.property?.hotel || 'Your Property';
+  const city     = st.property?.city  || 'your market';
+  const stars    = st.property?.stars || '4-star';
+  const budgetAdr = st.budget?.adr || 0;
+
+  const me    = lh.find(h => h.isYou);
+  const comp  = lh.filter(h => !h.isYou).sort((a, b) => b.rate - a.rate);
+  const all   = [...lh].sort((a, b) => b.rate - a.rate);
+
+  const myRate    = me?.rate || 0;
+  const myReview  = me?.review || 0;
+  const compAvg   = Math.round(comp.reduce((s, h) => s + h.rate, 0) / (comp.length || 1));
+  const compLo    = Math.min(...comp.map(h => h.rate));
+  const compHi    = Math.max(...comp.map(h => h.rate));
+  const spread    = compHi - compLo;
+  const myRank    = all.findIndex(h => h.isYou) + 1;
+  const vsAvgPct  = compAvg ? ((myRate - compAvg) / compAvg * 100) : 0;
+  const vsAvgStr  = (vsAvgPct >= 0 ? '+' : '') + vsAvgPct.toFixed(1) + '%';
+  const reviewAvg = parseFloat((comp.reduce((s, h) => s + (h.review || 0), 0) / (comp.length || 1)).toFixed(1));
+  const limited   = comp.filter(h => h.avail === 'Limited' || h.avail === 'Sold out');
+  const available = comp.filter(h => h.avail === 'Available');
+  const aboveMe   = comp.filter(h => h.rate > myRate);
+  const belowMe   = comp.filter(h => h.rate < myRate);
+  const highest   = comp[0];
+  const lowest    = comp[comp.length - 1];
+  const reviewLeader = [...comp].sort((a, b) => b.review - a.review)[0];
+
+  // Rate position signal
+  const rateSignalColour = vsAvgPct < -8 ? 'red' : vsAvgPct < -2 ? 'amber' : vsAvgPct > 6 ? 'amber' : 'green';
+
+  // Review gap
+  const reviewGap = myReview - reviewAvg;
+  const reviewColour = reviewGap >= 0.3 ? 'green' : reviewGap >= -0.2 ? 'amber' : 'red';
+
+  // Availability pressure
+  const limitedPct = Math.round((limited.length / (comp.length || 1)) * 100);
+  const availColour = limitedPct >= 50 ? 'red' : limitedPct >= 25 ? 'amber' : 'green';
+  const availLabel  = limitedPct >= 50 ? 'High pressure' : limitedPct >= 25 ? 'Moderate' : 'Low pressure';
+
+  // Rate spread colour
+  const spreadColour = spread > compAvg * 0.2 ? 'amber' : 'green';
+
+  // ── POSITIONING SUMMARY ──
+  const positionWord = myRank === 1 ? 'leading the market' : myRank <= 2 ? 'near the top' : myRank === all.length ? 'at the bottom of the market' : `ranked ${myRank} of ${all.length}`;
+  const vs = vsAvgPct >= 0
+    ? `${vsAvgStr} above`
+    : `${Math.abs(vsAvgPct).toFixed(1)}% below`;
+
+  let positioningSummary = `${myHotel} is ${positionWord} at ${sym}${myRate}, sitting ${vs} the compset average of ${sym}${compAvg}. `;
+
+  if (myReview > reviewAvg + 0.2) {
+    positioningSummary += `With a review score of ★${myReview} vs compset avg ★${reviewAvg}, the property has a quality advantage that ${vsAvgPct < 0 ? 'is not yet being monetised' : 'supports its premium position'}. `;
+  } else if (myReview < reviewAvg - 0.2) {
+    positioningSummary += `A review score of ★${myReview} vs compset avg ★${reviewAvg} suggests the current rate ${vsAvgPct > 0 ? 'may face push-back' : 'is appropriately conservative'}. `;
+  } else {
+    positioningSummary += `Review scores are broadly aligned with the market (★${myReview} vs avg ★${reviewAvg}). `;
+  }
+
+  if (limitedPct >= 40) {
+    positioningSummary += `${limitedPct}% of compset showing limited availability — demand is strong, suggesting room to push rate.`;
+  } else if (limitedPct === 0) {
+    positioningSummary += `All compset showing available — no immediate displacement pressure, but worth monitoring lead time closely.`;
+  } else {
+    positioningSummary += `${limited.map(h => h.name.split(' ')[0]).join(' and ')} showing limited availability — early demand signal worth tracking.`;
+  }
+
+  // ── SIGNALS ──
+  const signals = [
+    {
+      label: 'Rate Position',
+      value: `${sym}${myRate} (${vsAvgStr})`,
+      colour: rateSignalColour,
+      desc: `Ranked ${myRank} of ${all.length} — ${aboveMe.length} competitor${aboveMe.length !== 1 ? 's' : ''} priced above, ${belowMe.length} below.`
+    },
+    {
+      label: 'Review Score',
+      value: `★${myReview}`,
+      colour: reviewColour,
+      desc: reviewGap >= 0.2
+        ? `${Math.abs(reviewGap).toFixed(1)} pts above comp avg ★${reviewAvg} — quality advantage.`
+        : reviewGap <= -0.2
+          ? `${Math.abs(reviewGap).toFixed(1)} pts below comp avg ★${reviewAvg} — rate must compensate.`
+          : `In line with comp avg ★${reviewAvg} — no differentiation on quality.`
+    },
+    {
+      label: 'Demand Pressure',
+      value: availLabel,
+      colour: availColour,
+      desc: limitedPct > 0
+        ? `${limited.length} of ${comp.length} competitors on limited availability.`
+        : `All ${comp.length} competitors showing open availability.`
+    },
+    {
+      label: 'Rate Spread',
+      value: `${sym}${spread}`,
+      colour: spreadColour,
+      desc: `Market ranges ${sym}${compLo}–${sym}${compHi}. Wide spread = segmented demand; narrow = commoditised.`
+    }
+  ];
+
+  // ── DETAILED ANALYSIS ──
+  const analysis = [];
+
+  // Positioning block
+  let posText = `${myHotel} sits at position ${myRank} of ${all.length} hotels by OTA rate at ${sym}${myRate}. `;
+  if (aboveMe.length > 0) {
+    posText += `The ${aboveMe.length} hotel${aboveMe.length > 1 ? 's' : ''} priced above — ${aboveMe.map(h => h.name).join(', ')} — are charging between ${sym}${Math.min(...aboveMe.map(h=>h.rate))} and ${sym}${highest.rate}. `;
+  }
+  if (belowMe.length > 0) {
+    posText += `${belowMe.map(h => h.name).join(' and ')} ${belowMe.length > 1 ? 'are' : 'is'} positioned below at ${sym}${lowest.rate}, likely competing on price.`;
+  }
+  if (vsAvgPct < -5) {
+    posText += ` A discount of ${Math.abs(vsAvgPct).toFixed(1)}% below average suggests either a deliberate occupancy-first strategy or underpricing — worth challenging, especially given ${myReview >= reviewAvg ? 'a strong review score' : 'the current review position'}.`;
+  } else if (vsAvgPct > 5) {
+    posText += ` A premium of ${vsAvgPct.toFixed(1)}% above average is only sustainable if review quality and product differentiation support it.`;
+  }
+  analysis.push({ heading: 'Rate Positioning', text: posText });
+
+  // Availability intelligence
+  let availText = '';
+  if (limited.length === 0) {
+    availText = `All compset properties are showing open availability. This is a low-pressure market window — no immediate urgency to convert and little justification to push rate on availability grounds alone. Monitor pickup trends over the next 2–3 weeks. `;
+  } else {
+    availText = `${limited.map(h => h.name).join(', ')} ${limited.length > 1 ? 'are' : 'is'} showing limited availability — this signals active pickup in the market. `;
+    if (limited.some(h => h.rate > myRate)) {
+      availText += `Notably, some constrained properties are priced above you, which means demand exists at higher rates. This is a direct signal that your rate floor may be set too conservatively. `;
+    }
+  }
+  availText += limited.length >= comp.length * 0.5
+    ? `With over half the compset constrained, the window to raise BAR is now — not after the fact.`
+    : `Keep a close watch on pickup: if 2+ more competitors move to limited within 7 days, move your rate up proactively.`;
+  analysis.push({ heading: 'Availability Intelligence', text: availText });
+
+  // Review vs rate
+  let reviewText = '';
+  if (myReview > 0 && reviewLeader) {
+    if (myReview >= reviewLeader.review) {
+      reviewText = `${myHotel} holds the highest review score in the compset at ★${myReview}. This is a significant commercial asset that should be monetised through rate, not given away in volume deals. `;
+    } else {
+      reviewText = `${reviewLeader.name} leads the compset on reviews at ★${reviewLeader.review} vs your ★${myReview}. `;
+    }
+  }
+  if (reviewGap > 0.3 && vsAvgPct < 0) {
+    reviewText += `You're scoring higher on reviews than the average but pricing below it — that's value being left on the table. A review advantage of ${reviewGap.toFixed(1)} points typically justifies a rate premium of 3–6%.`;
+  } else if (reviewGap > 0.3 && vsAvgPct > 0) {
+    reviewText += `The current rate premium is backed by a quality advantage — the story is coherent and defensible in sales conversations.`;
+  } else if (reviewGap < -0.2) {
+    reviewText += `Pricing above the review quality average creates friction in the booking decision. Consider whether product improvements or a rate adjustment to match perceived value is the right lever.`;
+  } else {
+    reviewText += `Quality and rate are broadly aligned with the market — differentiation will need to come from product, distribution, or group-specific value-adds rather than rate alone.`;
+  }
+  analysis.push({ heading: 'Review Score vs Rate', text: reviewText });
+
+  // Market opportunity
+  let oppText = '';
+  const biggestGap = comp.reduce((best, h) => {
+    const gap = Math.abs(h.rate - myRate);
+    return gap > best.gap ? { hotel: h, gap } : best;
+  }, { hotel: null, gap: 0 });
+
+  if (compHi - myRate > myRate * 0.1 && vsAvgPct < 0) {
+    oppText = `The rate spread of ${sym}${spread} and your below-average positioning suggest there is headroom of up to ${sym}${compHi - myRate} between your current rate and the market ceiling. `;
+  } else if (vsAvgPct > 8) {
+    oppText = `Priced ${vsAvgPct.toFixed(1)}% above the compset average, there is meaningful conversion risk if unaccompanied by strong differentiation. `;
+  } else {
+    oppText = `The market spread of ${sym}${spread} (${sym}${compLo}–${sym}${compHi}) reflects a fairly structured competitive set. `;
+  }
+
+  if (budgetAdr > 0 && myRate < budgetAdr * 0.95) {
+    oppText += `Your current OTA rate of ${sym}${myRate} is below your budget ADR target of ${sym}${budgetAdr} — this gap needs to be closed either through rate increases or by capturing group and non-OTA business above the rack rate. `;
+  }
+
+  if (lowest.rate < compAvg * 0.85) {
+    oppText += `${lowest.name} appears to be a distressed or budget competitor at ${sym}${lowest.rate} — ${Math.round(((compAvg - lowest.rate) / compAvg) * 100)}% below the market average. Don't let their floor anchor your pricing conversations.`;
+  } else {
+    oppText += `The compset floor is reasonably tight at ${sym}${compLo}, suggesting no single player is aggressively undercutting — a healthier market dynamic for rate integrity.`;
+  }
+  analysis.push({ heading: 'Market Opportunity', text: oppText });
+
+  // ── RECOMMENDATIONS ──
+  const recommendations = [];
+
+  // Rate recommendation
+  if (vsAvgPct < -3 && reviewGap >= 0) {
+    recommendations.push({ text: `Raise your OTA rate by ${sym}${Math.round((compAvg - myRate) * 0.6)}–${sym}${Math.round(compAvg - myRate)} to close the gap with the compset average. Your review score of ★${myReview} supports a rate at or above ${sym}${compAvg} — you are currently discounting quality that the market would pay for.` });
+  } else if (vsAvgPct > 8 && reviewGap < 0) {
+    recommendations.push({ text: `Consider a tactical rate adjustment down by ${sym}${Math.round(myRate * 0.05)} — your review score is below the compset average and the current premium may be creating booking hesitation at the point of comparison.` });
+  } else {
+    recommendations.push({ text: `Maintain current rate positioning within ${sym}${Math.round(compAvg * 0.97)}–${sym}${Math.round(compAvg * 1.03)} and focus on driving conversion through package differentiators (F&B, early check-in, meeting space) rather than rate movement.` });
+  }
+
+  // Availability-driven recommendation
+  if (limitedPct >= 40) {
+    recommendations.push({ text: `Move BAR up ${sym}${Math.round(compAvg * 0.04)}–${sym}${Math.round(compAvg * 0.07)} now — ${limitedPct}% of compset on limited availability confirms demand absorption at current rates. Don't wait for your own pickup to validate; the market is signalling it already.` });
+  } else if (limitedPct > 0) {
+    recommendations.push({ text: `Watch pickup velocity daily. If ${limited.map(h => h.name.split(' ')[0]).join(' or ')} moves to sold-out within the week, raise rate immediately by ${sym}${Math.round(compAvg * 0.03)} — you want to move price before demand fully absorbs, not after.` });
+  } else {
+    recommendations.push({ text: `With all compset open, focus on length-of-stay promotions and early-booking incentives to generate pickup signal. Rate increases should be data-driven — wait for 2+ competitors to show limited before moving.` });
+  }
+
+  // Group/strategic recommendation
+  if (budgetAdr > 0 && myRate < budgetAdr) {
+    recommendations.push({ text: `Your OTA rate (${sym}${myRate}) is below your budget ADR target (${sym}${budgetAdr}). For group business, hold firm at ${sym}${budgetAdr} or above — group volume should not be used to dilute ADR further. Offer F&B or concession value-adds before discounting rate.` });
+  } else if (myReview > reviewAvg + 0.3) {
+    recommendations.push({ text: `Leverage your review advantage (★${myReview} vs avg ★${reviewAvg}) actively in group sales conversations — it is a quantified quality signal. Present compset review data alongside your rate proposal to justify ${sym}${Math.round(myRate * 1.03)}–${sym}${Math.round(myRate * 1.06)} without discounting.` });
+  } else {
+    recommendations.push({ text: `For group proposals, use the compset spread of ${sym}${compLo}–${sym}${compHi} as the anchor in negotiation. Position your offer at compset average (${sym}${compAvg}) and protect floor by bundling non-discountable F&B or event space rather than cutting room rate.` });
+  }
+
+  return { positioning_summary: positioningSummary, signals, analysis, recommendations, sym };
+}
+
+function renderAiAnalysis(r, sym) {
+  // Positioning summary
+  document.getElementById('ai-positioning').innerHTML =
+    r.positioning_summary
+      .replace(/\b(\d+%|\d+\.\d+%|[€$£zł]\d+)/g, '<em>$1</em>')
+      .replace(/\b(above|below|higher|lower|leading|lagging|opportunity|risk)\b/gi, '<strong>$1</strong>');
+
+  // Signals grid
+  document.getElementById('ai-signals-grid').innerHTML = (r.signals || []).map(s => `
+    <div class="ai-signal">
+      <div class="ai-signal-label">${s.label}</div>
+      <div class="ai-signal-val ${s.colour || ''}">${s.value}</div>
+      <div class="ai-signal-desc">${s.desc}</div>
+    </div>
+  `).join('');
+
+  // Detail blocks
+  document.getElementById('ai-detail').innerHTML = (r.analysis || []).map(a => `
+    <div class="ai-detail-block">
+      <div class="ai-detail-heading">${a.heading}</div>
+      <div class="ai-detail-text">${
+        a.text
+          .replace(/\b(\d+%|\d+\.\d+%|[€$£zł]\d+)/g, '<strong>$1</strong>')
+      }</div>
+    </div>
+  `).join('');
+
+  // Recommendations
+  document.getElementById('ai-recs').innerHTML = `
+    <div class="ai-recs-title">Recommended Actions</div>
+    ${(r.recommendations || []).map(rec => `
+      <div class="ai-rec-item">
+        <span class="ai-rec-arrow">→</span>
+        <span>${rec.text.replace(/^([^.]+\.)/, '<strong>$1</strong>')}</span>
+      </div>
+    `).join('')}
+  `;
 }
 
 boot();
