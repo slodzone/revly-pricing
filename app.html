@@ -2123,7 +2123,7 @@
                 <div class="how-num">01</div>
                 <div class="how-body">
                   <div class="how-title">Lighthouse OTA rates</div>
-                  <div class="how-desc">Real compset pricing anchors your base rate. The engine averages competitor OTA rates and applies a group discount factor.</div>
+                  <div class="how-desc">Competitor OTA rates from Lighthouse anchor the base rate. Group discount, segment, volume, and loyalty factors are then applied on top.</div>
                 </div>
               </div>
               <div class="how-item">
@@ -2596,7 +2596,7 @@
         <div class="settings-block" style="margin-bottom:0">
           <div class="settings-block-header">
             <div class="settings-block-title">Competitive Set</div>
-            <div class="settings-block-sub">Hotels used for compset benchmarking when Lighthouse data is unavailable.</div>
+            <div class="settings-block-sub">Hotels used to simulate compset rates. The simulated rates are anchored to your Target ADR in Budget Settings above — set that first for accurate estimates.</div>
           </div>
           <div class="info-bar" style="margin-bottom:1rem">
             <svg viewBox="0 0 14 14" fill="none" width="13" height="13" style="flex-shrink:0;margin-top:1px"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7 6v4M7 4.5v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -2840,30 +2840,31 @@ function removeReport(type) {
 function buildMockCompset() {
   const st       = getState();
   const myName   = st.property?.hotel || 'Your Property';
-  // Base rate: use average of any previously stored lh rates, or 140 fallback
-  const prevLh   = st.lighthouseData?.find(h => !h.isYou);
-  const baseRate = prevLh?.rate || 140;
-  // Market rate ~5-8% above group rate
-  const marketRate = Math.round(baseRate * 1.065);
+
+  // Anchor rate: use budget ADR if set, otherwise 160 as a reasonable 4-star default
+  // User should configure this in Settings → Budget → Target ADR
+  const anchorRate = st.budget?.adr || 160;
 
   const compNames = (st.compset && st.compset.length)
     ? st.compset
     : ['Competitor A', 'Competitor B', 'Competitor C', 'Competitor D'];
 
-  const spread  = [+0.13, +0.07, -0.04, -0.11, -0.17];
+  // Realistic OTA spread around anchor — competitors range ±15%
+  // Sorted high-to-low so the table looks natural
+  const spread  = [+0.14, +0.07, +0.02, -0.06, -0.13];
   const avails  = ['Limited', 'Available', 'Available', 'Available', 'Available'];
-  const reviews = [8.1, 8.6, 8.3, 7.9, 7.6];
+  const reviews = [8.1, 8.5, 8.3, 7.9, 7.6];
 
   const competitors = compNames.slice(0, 5).map((name, i) => ({
     name,
-    rate:   Math.round(marketRate * (1 + (spread[i] ?? (i * 0.05 - 0.08)))),
+    rate:   Math.round(anchorRate * (1 + (spread[i] ?? (i * 0.04 - 0.08)))),
     avail:  avails[i] || 'Available',
     review: reviews[i] || (8.5 - i * 0.2),
     isYou:  false,
   }));
 
   return [
-    { name: myName, rate: Math.round(marketRate * 0.94), avail: 'Available', review: 8.4, isYou: true },
+    { name: myName, rate: anchorRate, avail: 'Available', review: 8.4, isYou: true },
     ...competitors,
   ];
 }
@@ -3320,37 +3321,39 @@ const ENGINE = {
     const nights     = Math.round((new Date(checkout) - new Date(checkin)) / 86400000);
     const month      = new Date(checkin).getMonth() + 1;
 
-    // ── 1. BASE — purely from Lighthouse OTA compset ──
-    // Use average OTA rate of competitors, then apply group discount (~12%)
-    let base = 140; // fallback if no Lighthouse data
+    // ── 1. BASE — OTA compset average (not pre-discounted) ──
+    // Use comp OTA average as-is. Group/volume/loyalty multipliers below apply the discount.
+    // Fallback: use budget ADR from state if no Lighthouse data
+    const st_engine = (()=>{ try { return JSON.parse(localStorage.getItem('revly_state')||'{}'); } catch{return {};} })();
+    let compOtaAvg = st_engine.budget?.adr || 160; // fallback
     if (lighthouseData?.length) {
-      const comp    = lighthouseData.filter(h => !h.isYou);
-      const otaAvg  = comp.reduce((s, h) => s + h.rate, 0) / (comp.length || 1);
-      base = otaAvg * 0.88; // OTA → group base rate (~12% group discount)
+      const comp   = lighthouseData.filter(h => !h.isYou);
+      compOtaAvg   = comp.reduce((s, h) => s + h.rate, 0) / (comp.length || 1);
     }
+    const base = compOtaAvg;
 
     // ── 2. MULTIPLIERS ──
-    const season   = this.seasonIndex[month] || 1;
-    const dow      = this._avgDow(checkin, checkout);
+    // Season & DOW used only as a soft demand signal (±5%), not full BAR swing
+    const season   = 0.97 + (this.seasonIndex[month] || 1) * 0.03; // compress: 0.97–1.03
+    const dow      = 0.98 + this._avgDow(checkin, checkout) * 0.02; // compress: 0.98–1.02
     const group    = this.groupFactor[groupType]  || 1;
     const fbM      = this.fbFactor[fb]            || 1;
     const urgencyM = this.urgencyFactor[urgency]  || 1;
     const repeatM  = this.repeatFactor[repeat]    || 1;
     const roomM    = this.roomFactor[roomType]    || 1;
-    const volume   = rooms >= 50 ? 0.93 : rooms >= 30 ? 0.96 : rooms >= 15 ? 0.98 : 1.00;
-    const mpiM     = 1; // No STR data — MPI not used
-    const rgiM     = 1; // No STR data — RGI not used
+    // Volume: group discount vs OTA (5–10% — realistic corporate group rates)
+    const volume   = rooms >= 50 ? 0.92 : rooms >= 30 ? 0.95 : rooms >= 15 ? 0.97 : 0.99;
     const pressure = this._availPressure(availability, totalRooms, rooms, checkin, checkout);
-    const pressM   = 0.90 + pressure * 0.25;
+    // Pressure: low avail = higher rate (0.95–1.12)
+    const pressM   = 0.95 + pressure * 0.17;
     const budgetM  = this._budgetPace(budget);
 
-    const balanced = Math.round(base * season * dow * group * fbM * urgencyM * repeatM * roomM * volume * mpiM * rgiM * pressM * budgetM);
-    const winRate  = Math.round(balanced * 0.92);
-    const maxRate  = Math.round(balanced * 1.10);
+    const balanced = Math.round(base * season * dow * group * fbM * urgencyM * repeatM * roomM * volume * pressM * budgetM);
+    const winRate  = Math.round(balanced * 0.93);
+    const maxRate  = Math.round(balanced * 1.08);
 
     // ── 3. METRICS ──
-    const compADR    = (lighthouseData?.filter(h=>!h.isYou).reduce((s,h)=>s+h.rate,0) /
-                        (lighthouseData?.filter(h=>!h.isYou).length||1)) || base;
+    const compADR    = compOtaAvg; // OTA average — group rate is always below this
     const sym        = this._sym(property?.currency);
     const vsCompPct  = ((balanced - compADR) / compADR * 100).toFixed(1);
     const vsCompStr  = (vsCompPct >= 0 ? '+' : '') + vsCompPct + '%';
@@ -3376,9 +3379,10 @@ const ENGINE = {
       const lo   = Math.min(...comp.map(h => h.rate));
       const hi   = Math.max(...comp.map(h => h.rate));
       const avg  = Math.round(comp.reduce((s,h)=>s+h.rate,0)/comp.length);
-      parts.push(`Compset OTA rates range ${sym}${lo}–${sym}${hi} (avg ${sym}${avg}). ` +
-        `Group base of ${sym}${Math.round(base)} applies a 12% OTA-to-group discount, then adjusted for ` +
-        `${groupType} segment, ${rooms} rooms × ${nights} nights, and current availability pressure.`);
+      parts.push(`Compset OTA rates range ${sym}${lo}–${sym}${hi}, averaging ${sym}${avg}. ` +
+        `Group rate of ${sym}${balanced} represents ${Math.abs(Math.round((balanced-avg)/avg*100))}% ` +
+        `${balanced < avg ? 'below' : 'above'} OTA average — adjusted for ${groupType} segment, ` +
+        `${rooms} rooms × ${nights} nights, ${fb} package, and ${pressureLabel.toLowerCase()} availability pressure.`);
     }
     if (!parts.length) {
       parts.push(`Rate calculated from seasonality (${month === new Date(checkin).getMonth()+1 ? season.toFixed(2) : season}× for this month), ` +
